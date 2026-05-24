@@ -21,9 +21,10 @@ Ak root existuje, citaj tieto interne pravidla:
 
 1. `marketplaces/agevolt-marketplace-creator/README.md`
 2. `marketplaces/agevolt-marketplace-creator/marketplace.yaml`
-3. `marketplaces/agevolt-marketplace-creator/modules/creator-intake/README.md`
-4. `marketplaces/agevolt-marketplace-creator/modules/creator-intake/rules.md`
-5. `marketplaces/agevolt-marketplace-creator/modules/creator-intake/artifact-proposal.md`
+3. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/README.md`
+4. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/rules.md`
+5. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-structure.md`
+6. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/artifact-proposal.md`
 
 Ak root neexistuje, pouzi fallback pravidla nizsie a povedz, ze interny SharePoint root sa nenasiel.
 

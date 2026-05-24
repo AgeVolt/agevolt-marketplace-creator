@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Marketplace"
+  short_description: "Navrhne minimalny AgeVolt marketplace."
+  default_prompt: "Priprav artifact proposal pre novy AgeVolt marketplace."
