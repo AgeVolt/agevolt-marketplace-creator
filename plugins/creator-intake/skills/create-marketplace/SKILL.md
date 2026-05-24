@@ -20,9 +20,18 @@ Ak root existuje, precitaj:
 - `README.md`
 - `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/rules.md`
 - `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-structure.md`
+- `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-catalog.md`
+- `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/git-update-flow.md`
 - `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/artifact-proposal.md`
 
-Ak root neexistuje, pouzi pravidla v tomto SKILL.md a povedz, ze interny SharePoint root sa nenasiel.
+Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
+
+- `../../kb/marketplace-structure.md`
+- `../../kb/marketplace-catalog.md`
+- `../../kb/git-update-flow.md`
+- `../../kb/artifact-proposal.md`
+
+Ak ani tie nie su dostupne, pouzi pravidla v tomto SKILL.md a povedz, ze interny SharePoint root sa nenasiel.
 
 ## Rozhodnutie
 
@@ -58,8 +67,10 @@ README.md
 
 `plugins/` v Gite pridaj az s prvym realnym pluginom.
 
-5. Nepridavaj realny plugin, skill, KB ani MCP do prazdneho marketplace bez samostatneho schvalenia.
-6. Pri firemnej zmene zapis `revision-history.md`, ak existuje.
+5. Aktualizuj `AI Agent/README.md` a `creator-intake/kb/marketplace-catalog.md`.
+6. Nepridavaj realny plugin, skill, KB ani MCP do prazdneho marketplace bez samostatneho schvalenia.
+7. Pri firemnej zmene zapis `revision-history.md`, ak existuje.
+8. Po Git pushi over `codex plugin marketplace upgrade <marketplace-id>`.
 
 ## Test
 

@@ -24,9 +24,19 @@ Ak root existuje, citaj tieto interne pravidla:
 3. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/README.md`
 4. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/rules.md`
 5. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-structure.md`
-6. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/artifact-proposal.md`
+6. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-catalog.md`
+7. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/git-update-flow.md`
+8. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/artifact-proposal.md`
 
-Ak root neexistuje, pouzi fallback pravidla nizsie a povedz, ze interny SharePoint root sa nenasiel.
+Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
+
+- `../../kb/rules.md`
+- `../../kb/marketplace-structure.md`
+- `../../kb/marketplace-catalog.md`
+- `../../kb/git-update-flow.md`
+- `../../kb/artifact-proposal.md`
+
+Ak ani tie nie su dostupne, pouzi fallback pravidla nizsie a povedz, ze interny SharePoint root sa nenasiel.
 
 ## Fallback Decision Rules
 

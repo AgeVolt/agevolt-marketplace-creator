@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Marketplace"
+  short_description: "Prida alebo upravi artefakt v existujucom marketplace."
+  default_prompt: "Pridaj plugin alebo skill do existujuceho AgeVolt marketplace."
