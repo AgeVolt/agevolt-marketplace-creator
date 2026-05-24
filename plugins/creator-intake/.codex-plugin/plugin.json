@@ -1,6 +1,6 @@
 {
   "name": "creator-intake",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Public-safe intake plugin for deciding whether an AgeVolt AI request should become a marketplace, plugin, skill, KB, MCP, rule, personal rule, script, or no new artifact.",
   "author": {
     "name": "AgeVolt",

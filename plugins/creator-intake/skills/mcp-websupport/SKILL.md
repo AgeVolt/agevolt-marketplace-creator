@@ -10,6 +10,7 @@ Tento skill je pre AgeVolt MCP servery hostovane ako PHP endpointy na WebSupport
 ## Bezpecnost
 
 - Nikdy nevkladaj FTP hesla, API tokeny ani ine secrets do public Git repozitara.
+- Nikdy nepouzivaj heslo poslane v chate. Ak ho pouzivatel posle, upozorni ho, ze ho ma zmenit, a pokracuj iba bezpecnym admin flowom.
 - Nikdy nevypisuj heslo do terminalu, chatu, commit message ani logu.
 - Public Git moze obsahovat iba bez-secrets skill, KB, `.mcp.json`, README, deployment postup a kod, ktory neobsahuje tajomstva.
 - Spolocne WebSupport pristupy citaj iba zo SharePoint-only private reference suboru.
@@ -27,6 +28,8 @@ AI Agent root typicky najdes tu:
 ```
 
 Ak private reference chyba, zastav a vypytaj si doplnenie pristupov alebo potvrdenie bezpecneho zdroja. Nevytvaraj nahradny public subor so secrets.
+
+Pri MS365/Entra administracii nikdy neziadaj ani nepouzivaj admin heslo v chate. Admin sa ma prihlasit interaktivne v Microsoft Entra admin center, `az login` alebo inom schvalenom bezpečnom flowe s MFA.
 
 ## Kam Patri MCP
 
@@ -76,6 +79,23 @@ Tool names pre Codex:
 
 Ak historicky REST endpoint pouziva bodkovane nazvy, server moze stare endpointy dalej podporovat interne, ale MCP `tools/list` musi vracat Codex-safe aliasy.
 
+## Private Data Auth
+
+Ak MCP pristupuje k private firemnym datam, musi mat auth pred tools/list/tools/call. Preferovany AgeVolt model je Microsoft Entra ID:
+
+- Entra single-tenant app registration pre konkretne MCP API,
+- PHP MCP server ako resource server,
+- `Authorization: Bearer <access_token>`,
+- validacia JWT cez Microsoft JWKS,
+- povinna kontrola `issuer`, `tenant`, `audience`, expiracie a podpisu,
+- volitelne `required_scopes`, `required_roles`, `allowed_groups` alebo `allowed_users`.
+
+Precitaj detailny postup:
+
+```text
+references/entra-private-mcp-auth.md
+```
+
 ## Write Flow
 
 Kazda write/delete/send/payment akcia musi mat preview/execute model:
@@ -95,8 +115,9 @@ Read-only tool moze bezat priamo.
 5. V PHP implementuj najprv `initialize`, `notifications/initialized`, `tools/list`, `tools/call`, `/health`.
 6. Pridaj `.mcp.json` do plugin rootu a `mcpServers: "./.mcp.json"` do `.codex-plugin/plugin.json`.
 7. Skill, ktory MCP pouziva, musi hovorit o priamych MCP tooloch a nesmie odporucat HTTP fallbacky.
-8. Pri zmene public pluginu bumpni verziu a pushni Git marketplace.
-9. Pri zmene private server_code zapis zmenu do SharePoint revision history.
+8. Ak MCP pristupuje k private datam, navrhni Entra auth a najprv over, ze cielovy klient vie ziskat a poslat Bearer token.
+9. Pri zmene public pluginu bumpni verziu a pushni Git marketplace.
+10. Pri zmene private server_code zapis zmenu do SharePoint revision history.
 
 ## Deploy Workflow
 
