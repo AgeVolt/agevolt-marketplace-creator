@@ -125,6 +125,17 @@ Do pluginu pridaj realne subory `assets/icon.png` a `assets/logo.png`. Kazdy ski
 
 V SharePoint `marketplace.yaml` pridaj plugin do `plugins`.
 
+## Pri Novom Alebo Upravovanom Skille
+
+Pred vytvorenim alebo upravou `SKILL.md` v existujucom plugine:
+
+1. Precitaj vsetky `skills/*/SKILL.md` v cielovom plugine.
+2. Porovnaj `name`, `description`, trigger slova, scope, non-goals, KB, nastroje a pravidla.
+3. Novy skill vytvor iba ked ma iny trigger, scope, description a pravidla.
+4. Ak sa obsah prekryva, uprav existujuci skill alebo vytiahni spolocne pravidla do `kb/`.
+5. Ak su dva skilly podobne, navrhni merge namiesto dalsieho delenia.
+6. Po update skontroluj, ze `agents/openai.yaml` kratky popis stale zodpoveda novemu `SKILL.md`.
+
 ## Pri Update Existujuceho Pluginu
 
 Pri zmene skillu, KB, MCP alebo plugin manifestu:

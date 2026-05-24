@@ -1,6 +1,6 @@
 ---
 name: creator-intake
-description: Pouzi ked pouzivatel chce vytvorit, zmenit alebo navrhnut AgeVolt marketplace, plugin, skill, knowledge base, MCP, rule, personal rule, script, automatizaciu alebo migraciu zo stareho AI; najma pri poziadavkach ako "sprav skill", "vytvor marketplace", "urob plugin", "potrebujem MCP", "premigruj AI" alebo "daj to pre vsetkych". Najprv rozhodni typ artefaktu a vytvor artifact proposal, nie priamu implementaciu.
+description: Pouzi pri nejasnej alebo novej AgeVolt AI poziadavke, ked treba najprv rozhodnut, ci ma vzniknut marketplace, plugin, skill, KB, MCP, rule, personal rule, script, automatizacia alebo migracia. Vystupom je intake rozhodnutie a artifact proposal, nie implementacia. Nepouzivaj na explicitny update existujuceho marketplace ani na samotnu tvorbu noveho marketplace po schvaleni.
 ---
 
 # Creator Intake
@@ -8,6 +8,17 @@ description: Pouzi ked pouzivatel chce vytvorit, zmenit alebo navrhnut AgeVolt m
 Creator Intake je public-safe bootstrap skill. Jeho uloha je brzdit vznik chaosu: pri poziadavkach na nove AI artefakty najprv rozhodni, co sa ma vobec vytvarat, a az potom navrhni najmensi overitelny krok.
 
 Minimal structure marker: `creator-intake-minimal-structure-001`.
+
+## Hranica Skillu
+
+Tento skill je router a intake brana:
+
+- pouzi ho, ked nie je jasne, aky artefakt je spravny,
+- vytvor `artifact proposal`,
+- neimplementuj zmenu v suboroch, pokial pouzivatel explicitne nepovie, ze mas pokracovat,
+- ked je schvaleny novy marketplace, dalsi krok patri do `create-marketplace`,
+- ked sa meni existujuci marketplace, plugin, skill, KB alebo MCP, dalsi krok patri do `update-marketplace`,
+- ked ide o PHP/WebSupport MCP, zapoj aj `mcp-websupport`.
 
 ## Najprv Najdi Interny Root
 
@@ -52,6 +63,8 @@ Ak ani tie nie su dostupne, pouzi fallback pravidla nizsie a povedz, ze interny 
 - Firemne rule: vytvor ked pravidlo plati pre viac ludi a ma ho zdedit novy clovek v rovnakej roli.
 - Personal rule: vytvor ked ide o preferenciu jedneho cloveka.
 - Script: vytvor ked treba deterministicku opakovatelnu operaciu.
+
+Pred odporucanim noveho skillu skontroluj, ci v cielovom plugine uz neexistuje podobny skill. Novy skill ma vzniknut iba vtedy, ked ma realne iny trigger, iny scope, inu description a ine pravidla ako existujuce skilly.
 
 ## MCP Standard
 

@@ -95,6 +95,32 @@ Subory `assets/icon.png` a `assets/logo.png` drzte pri danom skille, aby cesty f
 - MCP poskytuje nastroje, resources alebo prompts.
 - KB drzi znalosti, ktore by zbytocne zatazovali `SKILL.md`.
 
+## Skill Boundary Standard
+
+V jednom plugine nesmu vznikat skilly s rovnakym ucelom len preto, ze pouzivatel poziada o "novy skill".
+
+Kazdy skill musi mat:
+
+- jedinecny frontmatter `description`,
+- jasny trigger,
+- jasny scope a non-goals,
+- vlastne rules alebo vlastny workflow,
+- pomenovane rozdiely voci ostatnym skillom v tom istom plugine.
+
+Pred `new-skill` alebo `update-skill` vzdy precitaj vsetky `skills/*/SKILL.md` v danom plugine. Ak sa novy obsah prekryva s existujucim skillom, preferuj:
+
+1. upravit existujuci skill,
+2. vytiahnut spolocne pravidla do `kb/`,
+3. zlucit podobne skilly,
+4. vytvorit novy skill az ked rozdiel ostava jasny.
+
+Duplicitny signal:
+
+- description sa spusta na tie iste poziadavky,
+- oba skilly citaju rovnaku KB a pouzivaju rovnake tooly,
+- lisia sa iba nazvom oddelenia alebo jednou vetou,
+- jeden skill je iba uzsia cast druheho bez vlastnych pravidiel.
+
 ## MCP Tool Naming Standard
 
 MCP server moze interne volat lubovolne API endpointy, ale tooly vystavene do Codexu musia mat nazvy, ktore model vie priamo volat.

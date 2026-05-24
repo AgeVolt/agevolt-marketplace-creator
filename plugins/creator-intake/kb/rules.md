@@ -20,11 +20,32 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 ## Stop Rules
 
 - Nevytvaraj firemny skill len preto, ze pouzivatel povedal "sprav skill".
+- Nevytvaraj novy skill, ak existujuci skill v rovnakom plugine ma podobny trigger, scope a pravidla; najprv navrhni update alebo zlucenie.
 - Neupravuj firemne marketplace/plugin/skill/KB/MCP/rule bez explicitnej poziadavky.
 - Nekopiruj stare `AI/` priecinky cele.
 - Nedavaj internu KB, customer data, secrets ani systemove exporty do public Git.
 - Pri MCP write akcii vyzaduj read/preview a explicitne potvrdenie.
 - Pri MCP nikdy nenavrhuj bezny user workflow cez priamy HTTP fallback namiesto MCP tool callu.
+
+## Skill Uniqueness Rules
+
+Kazdy skill v plugine musi mat jasny vlastny dovod existencie.
+
+Pred vytvorenim alebo upravou `SKILL.md`:
+
+1. Precitaj vsetky ostatne `skills/*/SKILL.md` v tom istom plugine.
+2. Porovnaj `name`, frontmatter `description`, trigger slova, scope, non-goals, povinne KB, pouzivane nastroje a bezpecnostne pravidla.
+3. Ak je novy skill podobny existujucemu skillu, nevytvaraj ho; navrhni update existujuceho skillu alebo presun spolocnych pravidiel do `kb/`.
+4. Ak dva existujuce skilly robia to iste, upozorni na duplicitu a navrhni zlucenie.
+5. Novy skill je povoleny iba ked ma iny opakovatelny workflow, ine spustacie situacie, iny scope a ine pravidla.
+6. `description` musi jasne povedat, kedy skill pouzit a idealne aj co patri do ineho skillu.
+7. Pri kazdom update `SKILL.md` znova over, ci sa hranica s ostatnymi skillmi nerozmazala.
+
+Kontrolna veta pred vytvorenim skillu:
+
+```text
+Precital som ostatne skilly v plugine a tento skill ma iny trigger/scope/rules ako: ...
+```
 
 ## MCP Tool Rules
 

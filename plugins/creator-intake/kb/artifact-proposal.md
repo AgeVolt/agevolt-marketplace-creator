@@ -12,6 +12,18 @@ Test:
 Required approval before writing:
 ```
 
+Pri novom alebo upravovanom skille dopln aj:
+
+```text
+Existing skills checked:
+Closest existing skill:
+Why not update existing:
+Unique trigger:
+Unique scope:
+Unique rules:
+Merge/split recommendation:
+```
+
 Pri MCP dopln aj:
 
 ```text

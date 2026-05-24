@@ -1,11 +1,23 @@
 ---
 name: update-marketplace
-description: Pouzi ked pouzivatel chce pridat alebo upravit plugin, skill, knowledge base, MCP, script alebo iny artefakt v existujucom AgeVolt marketplace a treba spravne upravit SharePoint aj Git marketplace tak, aby si ostatni pouzivatelia vedeli zmenu aktualizovat cez Codex upgrade.
+description: Pouzi iba ked sa pridava alebo upravuje plugin, skill, knowledge base, MCP, script alebo iny artefakt v uz existujucom AgeVolt marketplace. Tento skill robi implementacny update v SharePointe aj Git marketplace a overuje upgrade. Nepouzivaj na nejasny intake ani na vytvorenie noveho marketplace repo.
 ---
 
 # Update Marketplace
 
 Tento skill je pre update existujuceho AgeVolt marketplace. Pouzi ho pri poziadavkach typu "pridaj plugin", "pridaj skill", "dopln KB", "zapoj MCP", "uprav existujuci plugin", "publikuj update" alebo "nech si to vsetci vedia upgradnut".
+
+## Hranica Skillu
+
+Tento skill je implementacny update existujuceho marketplace:
+
+- pridanie alebo uprava pluginu,
+- pridanie alebo uprava skillu,
+- pridanie alebo uprava KB,
+- pridanie alebo uprava MCP,
+- manifest update, version bump, Git push a Codex upgrade.
+
+Nepouzivaj ho, ked poziadavka este len rozhoduje, co ma vzniknut; vtedy pouzi `creator-intake`. Nepouzivaj ho na vytvorenie noveho marketplace repo; vtedy pouzi `create-marketplace`.
 
 ## Najprv Nacitaj Kontext
 
@@ -90,6 +102,19 @@ gh repo clone AgeVolt/<marketplace-id> C:\AiAgent\repos\<marketplace-id>
 Pri novom plugine uprav `.agents/plugins/marketplace.json` a pridaj entry s `source.path = "./plugins/<plugin-id>"`.
 
 Pri update existujuceho pluginu bumpni `.codex-plugin/plugin.json` `version`.
+
+## Skill Uniqueness Standard
+
+Pri kazdom `new-skill` alebo `update-skill` v existujucom plugine:
+
+1. Najprv precitaj vsetky `skills/*/SKILL.md` v cielovom plugine.
+2. Porovnaj frontmatter `name`, `description`, trigger slova, scope, non-goals, povinne KB a pravidla.
+3. Novy skill vytvor iba ked ma realne iny trigger, iny pouzivatelsky zamer, iny scope a ine pravidla ako existujuce skilly.
+4. Ak je rozdiel iba v par vetach, dopln existujuci skill alebo presun spolocne pravidla do `kb/`.
+5. Ak dva skilly hovoria skoro to iste, navrhni zlucenie a nevytvaraj treti podobny skill.
+6. Pri update `SKILL.md` skontroluj, ci sa jeho `description` stale nelisi prilis malo od ostatnych skillov v plugine.
+7. `description` musi byt pouzitelny ako trigger pre Codex: konkretne kedy skill pouzit, kedy ho nepouzit a cim sa lisi od susednych skillov.
+8. Ak hranica medzi skillmi nie je jasna, zastav a vrat kratke porovnanie plus odporucanie `merge`, `split`, alebo `keep separate`.
 
 Pri MCP pridaj alebo uprav:
 

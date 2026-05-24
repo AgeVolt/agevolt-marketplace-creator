@@ -1,11 +1,22 @@
 ---
 name: create-marketplace
-description: Pouzi ked pouzivatel chce vytvorit, navrhnut alebo upravit AgeVolt AI marketplace, rozdelit pluginy medzi marketplaces, pripravit Git marketplace repo, alebo rozhodnut ci poziadavka patri do noveho marketplace alebo existujuceho pluginu. Najprv vytvor artifact proposal a az potom minimalny overitelny krok.
+description: Pouzi iba ked sa vytvara novy AgeVolt marketplace, meni sa rozdelenie medzi marketplace-mi, pripravuje sa nove Git marketplace repo, alebo sa riesi marketplace-level katalog/naming. Nepouzivaj na pridanie alebo upravu pluginu, skillu, KB alebo MCP v existujucom marketplace; to patri do update-marketplace.
 ---
 
 # Create Marketplace
 
 Tento skill vedie tvorbu AgeVolt marketplace. Ciel je minimalny, overitelny a udrzatelny marketplace, nie velky build.
+
+## Hranica Skillu
+
+Tento skill pracuje na urovni marketplace:
+
+- novy marketplace,
+- premenovanie alebo rozdelenie marketplace,
+- Git marketplace repo a `.agents/plugins/marketplace.json`,
+- SharePoint `marketplace.yaml`, README a katalog.
+
+Nepouzivaj ho na tvorbu skillu, KB, MCP alebo pluginu v existujucom marketplace. Ak uz marketplace existuje a menime jeho obsah, pouzi `update-marketplace`.
 
 ## Najprv Nacitaj Kontext
 
@@ -46,6 +57,8 @@ Ak ide len o postup, navrhni skill.
 Ak ide len o znalosti, navrhni KB.
 
 Ak ide o zive data, API, vypocet alebo zapis, navrhni MCP a skill, ktory vysvetli jeho bezpecne pouzitie.
+
+Pred navrhnutim noveho marketplace over `marketplace-catalog.md`. Pred navrhnutim noveho skillu v buducej implementacii upozorni, ze cielovy plugin musi mat kontrolu existujucich `skills/*/SKILL.md`, aby nevznikol duplicitny skill s rovnakym triggerom.
 
 ## MCP Standard Pri Navrhu
 
