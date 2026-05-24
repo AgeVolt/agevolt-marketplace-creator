@@ -1,11 +1,11 @@
-# AgeVolt Marketplace Creator
+# AgeVolt Creator
 
 Public-safe Git marketplace for AgeVolt AI artifact creation governance.
 
 This repository is intentionally small. It contains only bootstrap plugin metadata and a minimal Creator Intake skill. Internal rules, examples, knowledge base, fixtures, and migration work remain in the SharePoint folder:
 
 ```text
-AI Agent/marketplaces/agevolt-marketplace-creator/
+AI Agent/marketplaces/agevolt-creator-marketplace/
 ```
 
 ## What This Marketplace Is For
@@ -33,7 +33,7 @@ creator-intake
 In Codex, add this Git marketplace:
 
 ```text
-AgeVolt/agevolt-marketplace-creator
+AgeVolt/agevolt-creator-marketplace
 ```
 
 Then install the `Creator Intake` plugin.
@@ -41,8 +41,8 @@ Then install the `Creator Intake` plugin.
 CLI equivalent:
 
 ```powershell
-codex plugin marketplace add AgeVolt/agevolt-marketplace-creator
-codex plugin add creator-intake@agevolt-marketplace-creator
+codex plugin marketplace add AgeVolt/agevolt-creator-marketplace
+codex plugin add creator-intake@agevolt-creator-marketplace
 ```
 
 ## Upgrade
@@ -50,7 +50,7 @@ codex plugin add creator-intake@agevolt-marketplace-creator
 Because this is a Git marketplace, Codex can upgrade it through the normal marketplace upgrade flow.
 
 ```powershell
-codex plugin marketplace upgrade agevolt-marketplace-creator
+codex plugin marketplace upgrade agevolt-creator-marketplace
 ```
 
 ## Public-Safe Rules

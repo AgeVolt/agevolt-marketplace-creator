@@ -20,7 +20,7 @@ marketplaces/
 
 | Marketplace ID | Git repo | Stav | Scope |
 | --- | --- | --- | --- |
-| `agevolt-marketplace-creator` | `https://github.com/AgeVolt/agevolt-marketplace-creator` | active | Creator pre navrh, tvorbu a update AgeVolt AI artefaktov. |
+| `agevolt-creator-marketplace` | `https://github.com/AgeVolt/agevolt-creator-marketplace` | active | Creator pre navrh, tvorbu a update AgeVolt AI artefaktov. |
 | `agevolt-personal-productivity-marketplace` | `https://github.com/AgeVolt/agevolt-personal-productivity-marketplace` | planned-empty | Osobne maily, kalendar, tasky, follow-upy, digesty, personal rules. |
 | `agevolt-finance-admin-marketplace` | `https://github.com/AgeVolt/agevolt-finance-admin-marketplace` | active-build | Financie, administracia, SuperFaktura, faktury, pohladavky, reporty. |
 | `agevolt-production-marketplace` | `https://github.com/AgeVolt/agevolt-production-marketplace` | planned-empty | Vyroba, servisna operativa, sklad, seriove cisla, kvalita, material. |

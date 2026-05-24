@@ -3,13 +3,13 @@
 ## Install
 
 ```powershell
-codex plugin marketplace add AgeVolt/agevolt-marketplace-creator
-codex plugin add creator-intake@agevolt-marketplace-creator
+codex plugin marketplace add AgeVolt/agevolt-creator-marketplace
+codex plugin add creator-intake@agevolt-creator-marketplace
 ```
 
 Expected:
 
-- marketplace appears as `agevolt-marketplace-creator`
+- marketplace appears as `agevolt-creator-marketplace`
 - plugin appears as `creator-intake`
 - skill appears as `creator-intake`
 
@@ -32,7 +32,7 @@ Expected:
 3. run:
 
 ```powershell
-codex plugin marketplace upgrade agevolt-marketplace-creator
+codex plugin marketplace upgrade agevolt-creator-marketplace
 ```
 
 Expected:

@@ -19,14 +19,14 @@ Pred rozhodovanim skus najst lokalny SharePoint root v tomto poradi:
 
 Ak root existuje, citaj tieto interne pravidla:
 
-1. `marketplaces/agevolt-marketplace-creator/README.md`
-2. `marketplaces/agevolt-marketplace-creator/marketplace.yaml`
-3. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/README.md`
-4. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/rules.md`
-5. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-structure.md`
-6. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-catalog.md`
-7. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/git-update-flow.md`
-8. `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/artifact-proposal.md`
+1. `marketplaces/agevolt-creator-marketplace/README.md`
+2. `marketplaces/agevolt-creator-marketplace/marketplace.yaml`
+3. `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/README.md`
+4. `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/rules.md`
+5. `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-structure.md`
+6. `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-catalog.md`
+7. `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/git-update-flow.md`
+8. `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/artifact-proposal.md`
 
 Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 

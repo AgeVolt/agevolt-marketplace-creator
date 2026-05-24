@@ -18,11 +18,11 @@ Najdi `AI Agent` root v tomto poradi:
 Ak root existuje, precitaj:
 
 - `README.md`
-- `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/rules.md`
-- `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-structure.md`
-- `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/marketplace-catalog.md`
-- `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/git-update-flow.md`
-- `marketplaces/agevolt-marketplace-creator/plugins/creator-intake/kb/artifact-proposal.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/rules.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-structure.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-catalog.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/git-update-flow.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/artifact-proposal.md`
 
 Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 

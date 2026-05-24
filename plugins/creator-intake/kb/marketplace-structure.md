@@ -25,6 +25,29 @@ Toto je aktualny standard pre AgeVolt AI Agent marketplaces.
 
 Na urovni marketplace nedrz prazdne `kb/`, `mcp/`, `templates/` ani `tests/`. Marketplace iba popisuje cielovu skupinu a zoskupuje instalovatelne pluginy.
 
+## Naming Standard
+
+Marketplace musi mat tri zosuladene nazvy:
+
+| Miesto | Standard | Priklad |
+| --- | --- | --- |
+| SharePoint priecinok | `agevolt-<oblast>-marketplace` | `agevolt-finance-admin-marketplace` |
+| Git repo | `AgeVolt/agevolt-<oblast>-marketplace` | `AgeVolt/agevolt-creator-marketplace` |
+| Codex display name | slug bez finalneho `-marketplace`, citatelny Title Case | `AgeVolt Creator` |
+
+Pravidla:
+
+- Slug vzdy konci na `-marketplace`.
+- Slug pouziva iba lowercase ASCII, cisla a pomlcky.
+- SharePoint priecinok a Git repo musia mat rovnaky slug.
+- `marketplace.json` top-level `name` musi byt rovnaky slug.
+- `marketplace.yaml` `id` musi byt rovnaky slug.
+- Codex display name vznikne zo slugu bez posledneho `-marketplace`: `agevolt-creator-marketplace` -> `AgeVolt Creator`.
+- Display name nikdy nekonci slovom `Marketplace`, ak je to iba technicky suffix slugu.
+- `interface.displayName` nesmie byt rovnaky pre viac AgeVolt marketplaces, inak je Codex UI neprehladne.
+- Nepouzivaj genericke display names ako `Built by AgeVolt`.
+- Priklady: `agevolt-finance-admin-marketplace` -> `AgeVolt Finance Admin`; `agevolt-product-myagevolt-marketplace` -> `AgeVolt Product myAgeVolt`.
+
 ## Standardny Plugin
 
 ```text
