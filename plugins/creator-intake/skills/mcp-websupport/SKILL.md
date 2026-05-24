@@ -98,6 +98,14 @@ Precitaj detailny postup:
 references/entra-private-mcp-auth.md
 ```
 
+Produkcnu Entra ochranu nezapinaj priamo na existujucom MCP, kym nie je overene, ze cielovy MCP klient vie pocas instalacie alebo prveho pouzitia ziskat a poslat Bearer token pre shared AgeVolt MCP audience. Pri Codex Git marketplace bol 2026-05-24 overeny negativny vysledok: server vratil korektne `401` a `WWW-Authenticate`, ale Codex nevypytal login a MCP tooly v chate nevystavil. Preto dalsie auth pokusy rob najprv na samostatnom test endpointe a produkciu rollbackni, ak tooly zmiznu.
+
+Pri priamom Microsoft Entra auth modely pocitaj s tym, ze Codex CLI OAuth login skusa Dynamic Client Registration. Entra ID DCR nepodporuje; overena chyba bola `Dynamic client registration not supported`. Preto priamy `authorization_servers = https://login.microsoftonline.com/.../v2.0` nestaci pre bezudrzbovy Codex login. Podporovane riesenia pre AgeVolt su:
+
+- ChatGPT Apps/Connectors flow s preddefinovanym OAuth klientom, ak cielovy surface umozni nakonfigurovat client ID/secret a redirect URI v ChatGPT sprave aplikacie.
+- AgeVolt OAuth broker medzi Codexom a Microsoft Entra, ktory voci Codexu podpori DCR alebo CIMD a voci Entra pouzije pevne registrovanu app `AgeVolt MCP`.
+- Docasny bearer token alebo vypnuta auth iba pre lokalny pilot bez private dat; nepouzivat ako standard pre firmu.
+
 ## Write Flow
 
 Kazda write/delete/send/payment akcia musi mat preview/execute model:
@@ -117,7 +125,7 @@ Read-only tool moze bezat priamo.
 5. V PHP implementuj najprv `initialize`, `notifications/initialized`, `tools/list`, `tools/call`, `/health`.
 6. Pridaj `.mcp.json` do plugin rootu a `mcpServers: "./.mcp.json"` do `.codex-plugin/plugin.json`.
 7. Skill, ktory MCP pouziva, musi hovorit o priamych MCP tooloch a nesmie odporucat HTTP fallbacky.
-8. Ak MCP pristupuje k private datam, pouzi shared Entra app `AgeVolt MCP` a najprv over, ze cielovy klient vie ziskat a poslat Bearer token pre shared audience.
+8. Ak MCP pristupuje k private datam, pouzi shared Entra app `AgeVolt MCP`, ale auth zapinaj najprv na samostatnom test endpointe a over, ze cielovy klient vie ziskat a poslat Bearer token pre shared audience.
 9. Pri zmene public pluginu bumpni verziu a pushni Git marketplace.
 10. Pri zmene private server_code zapis zmenu do SharePoint revision history.
 

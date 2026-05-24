@@ -125,6 +125,43 @@ Ak aktualny Codex Git plugin nevie pre dany custom marketplace spustit OAuth flo
 
 Neobchadzaj to ulozenym admin heslom, refresh tokenom alebo dlhodobym user tokenom v PHP.
 
+AgeVolt overenie 2026-05-24:
+
+- SuperFaktura MCP na WebSupporte bol zapnuty do `auth.mode = entra`.
+- `GET /health` fungoval ako public health a ukazal `auth=entra`.
+- `POST /mcp` bez tokenu korektne vratil `401` a `WWW-Authenticate` s `resource_metadata`.
+- Codex Git marketplace po reinstall/restart nevypytal Microsoft login.
+- V novom chate sa MCP tooly `sf_documents_*` nevystavili.
+- Kedze pilot MCP v case testu nepouzivali ostatni pouzivatelia, endpoint ostal v `auth.mode = entra` a dalsi krok je rozbehat klientsky OAuth login cez Codex/ChatGPT podporovany flow.
+- Priamy `codex mcp login agevolt-superfaktura --scopes MCP.Access` zlyhal na `Dynamic client registration not supported`.
+- Zaver: priamy Microsoft Entra authorization server nie je dost pre Codex Git marketplace OAuth, lebo Codex skusa DCR a Entra DCR neposkytuje.
+
+Pravidlo: Entra auth pre private PHP MCP najprv skusaj na samostatnom test endpointe, napriklad `/mcp/<server>-auth-test/mcp`, ak endpoint uz pouzivaju bezni pouzivatelia. Na nepouzivanom pilote moze ostat auth zapnuta, kym sa overuje klientsky OAuth flow.
+
+## AgeVolt OAuth Broker Pattern
+
+Ak ma byt login bezudrzbovy pre Codex Git marketplace, vytvor AgeVolt OAuth broker:
+
+```text
+Codex MCP OAuth client
+  -> AgeVolt OAuth broker s DCR alebo CIMD
+  -> Microsoft Entra app AgeVolt MCP
+  -> AgeVolt OAuth broker vyda MCP access token
+  -> PHP MCP validuje broker token
+```
+
+Broker musi:
+
+- vystavit OAuth authorization server metadata,
+- podporit `registration_endpoint` pre DCR alebo CIMD client IDs,
+- pouzit authorization-code + PKCE,
+- presmerovat pouzivatela na Microsoft Entra login,
+- po callbacku validovat Entra identity a vydat kratkodoby MCP token s audience konkretneho MCP resource,
+- publikovat JWKS, aby PHP MCP servery vedeli podpis tokenu overit,
+- nepouzivat ani neukladat hesla pouzivatelov.
+
+Tento broker je preferovany standard pre Codex Git marketplace + Entra, pokial ChatGPT Apps/Connectors sprava neponukne preddefinovany OAuth client pre dany connector.
+
 ## Test Plan
 
 Pred nasadenim:
@@ -136,3 +173,4 @@ Pred nasadenim:
 - request s validnym tokenom pre shared AgeVolt MCP audience prejde,
 - request s tokenom pre Microsoft Graph alebo inu app odmietne `audience is not allowed`,
 - request z ineho tenant/domain odmietne.
+- novy Codex/ChatGPT chat po instalacii pluginu realne vidi MCP tooly a nepada do fallback HTTP volani.
