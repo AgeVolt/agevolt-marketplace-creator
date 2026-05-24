@@ -70,7 +70,7 @@ README.md
 5. Aktualizuj `AI Agent/README.md` a `creator-intake/kb/marketplace-catalog.md`.
 6. Nepridavaj realny plugin, skill, KB ani MCP do prazdneho marketplace bez samostatneho schvalenia.
 7. Pri firemnej zmene zapis `revision-history.md`, ak existuje.
-8. Po Git pushi over `codex plugin marketplace upgrade <marketplace-id>`.
+8. Po Git pushi over `codex plugin marketplace upgrade <codex-marketplace-id>`.
 
 ## Test
 

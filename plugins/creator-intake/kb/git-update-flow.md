@@ -11,7 +11,7 @@ Preto kazdy public-safe artefakt musi mat:
 1. SharePoint source v `AI Agent/marketplaces/<marketplace-id>/`.
 2. Git publikovatelny obsah v `https://github.com/AgeVolt/<marketplace-id>`.
 3. Commit a push do Git repozitara.
-4. Overenie cez `codex plugin marketplace upgrade <marketplace-id>`.
+4. Overenie cez `codex plugin marketplace upgrade <codex-marketplace-id>`.
 
 ## Pri Novom Marketplace
 
@@ -35,13 +35,16 @@ README.md
 
 ```json
 {
-  "name": "<marketplace-id>",
+  "name": "<codex-marketplace-id>",
   "interface": {
     "displayName": "<Human Name>"
   },
   "plugins": []
 }
 ```
+
+`<marketplace-id>` je dlhy SharePoint/Git slug, napriklad `agevolt-finance-admin-marketplace`.
+`<codex-marketplace-id>` je kratky UI slug, napriklad `finance-admin`. Tento kratky nazov Codex zobrazuje vedla nazvu pluginu v zozname doplnkov, preto nepouzivaj `agevolt` ani `marketplace`, ak to nie je nutne.
 
 Potom aktualizuj:
 
@@ -105,6 +108,20 @@ Do `.agents/plugins/marketplace.json` pridaj entry:
 }
 ```
 
+Plugin manifest musi mat standardne AgeVolt UI assety:
+
+```json
+{
+  "interface": {
+    "brandColor": "#280046",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}
+```
+
+Do pluginu pridaj realne subory `assets/icon.png` a `assets/logo.png`. Kazdy skill s `agents/openai.yaml` ma mat vlastne `assets/icon.png`, `assets/logo.png`, `icon_small`, `icon_large` a `brand_color`.
+
 V SharePoint `marketplace.yaml` pridaj plugin do `plugins`.
 
 ## Pri Update Existujuceho Pluginu
@@ -117,7 +134,7 @@ Pri zmene skillu, KB, MCP alebo plugin manifestu:
 4. Ak pribudol MCP server, pridaj `mcpServers` do `plugin.json` a `.mcp.json` do plugin rootu.
 5. Ak MCP server zmizol, odstran `mcpServers` aj `.mcp.json`.
 6. Commitni a pushni Git repo.
-7. Spusti `codex plugin marketplace upgrade <marketplace-id>`.
+7. Spusti `codex plugin marketplace upgrade <codex-marketplace-id>`.
 8. Over, ze cache obsahuje novu verziu pluginu a novy skill/KB/MCP.
 
 Bez version bumpu moze byt tazsie overit, ci sa pouzivatelovi naozaj refreshol plugin cache.
@@ -153,7 +170,7 @@ Pred pushom:
 
 Po pushi:
 
-- `codex plugin marketplace upgrade <marketplace-id>`
+- `codex plugin marketplace upgrade <codex-marketplace-id>`
 - skontroluj `~/.codex/config.toml` `last_revision`,
-- skontroluj cache `~/.codex/plugins/cache/<marketplace-id>/<plugin-id>/<version>/`,
+- skontroluj cache `~/.codex/plugins/cache/<codex-marketplace-id>/<plugin-id>/<version>/`,
 - pri MCP over, ze `.mcp.json` je v cache a plugin manifest ma `mcpServers`.

@@ -4,12 +4,12 @@
 
 ```powershell
 codex plugin marketplace add AgeVolt/agevolt-creator-marketplace
-codex plugin add creator-intake@agevolt-creator-marketplace
+codex plugin add creator-intake@creator
 ```
 
 Expected:
 
-- marketplace appears as `agevolt-creator-marketplace`
+- marketplace appears as `creator`
 - plugin appears as `creator-intake`
 - skill appears as `creator-intake`
 
@@ -32,7 +32,7 @@ Expected:
 3. run:
 
 ```powershell
-codex plugin marketplace upgrade agevolt-creator-marketplace
+codex plugin marketplace upgrade creator
 ```
 
 Expected:

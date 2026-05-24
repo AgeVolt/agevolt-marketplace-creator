@@ -18,16 +18,16 @@ marketplaces/
 
 ## Marketplaces
 
-| Marketplace ID | Git repo | Stav | Scope |
-| --- | --- | --- | --- |
-| `agevolt-creator-marketplace` | `https://github.com/AgeVolt/agevolt-creator-marketplace` | active | Creator pre navrh, tvorbu a update AgeVolt AI artefaktov. |
-| `agevolt-personal-productivity-marketplace` | `https://github.com/AgeVolt/agevolt-personal-productivity-marketplace` | planned-empty | Osobne maily, kalendar, tasky, follow-upy, digesty, personal rules. |
-| `agevolt-finance-admin-marketplace` | `https://github.com/AgeVolt/agevolt-finance-admin-marketplace` | active-build | Financie, administracia, SuperFaktura, faktury, pohladavky, reporty. |
-| `agevolt-production-marketplace` | `https://github.com/AgeVolt/agevolt-production-marketplace` | planned-empty | Vyroba, servisna operativa, sklad, seriove cisla, kvalita, material. |
-| `agevolt-support-helpdesk-marketplace` | `https://github.com/AgeVolt/agevolt-support-helpdesk-marketplace` | planned-empty | Support, helpdesk, incidenty, odpovede, eskalacie, support KB. |
-| `agevolt-product-myagevolt-marketplace` | `https://github.com/AgeVolt/agevolt-product-myagevolt-marketplace` | planned-empty | myAgeVolt portal, portalova KB, produktove pravidla, developer tools. |
-| `agevolt-product-chargers-marketplace` | `https://github.com/AgeVolt/agevolt-product-chargers-marketplace` | planned-empty | Nabijacky, cenniky, navody, produktova KB, sluzby okolo zariadeni. |
-| `agevolt-public-user-tools-marketplace` | `https://github.com/AgeVolt/agevolt-public-user-tools-marketplace` | planned-empty | Public-safe pouzivatelske navody, troubleshooting a verejne integracie. |
+| Marketplace ID | Codex ID | Git repo | Stav | Scope |
+| --- | --- | --- | --- | --- |
+| `agevolt-creator-marketplace` | `creator` | `https://github.com/AgeVolt/agevolt-creator-marketplace` | active | Creator pre navrh, tvorbu a update AgeVolt AI artefaktov. |
+| `agevolt-personal-productivity-marketplace` | `personal-productivity` | `https://github.com/AgeVolt/agevolt-personal-productivity-marketplace` | planned-empty | Osobne maily, kalendar, tasky, follow-upy, digesty, personal rules. |
+| `agevolt-finance-admin-marketplace` | `finance-admin` | `https://github.com/AgeVolt/agevolt-finance-admin-marketplace` | active-build | Financie, administracia, SuperFaktura, faktury, pohladavky, reporty. |
+| `agevolt-production-marketplace` | `production` | `https://github.com/AgeVolt/agevolt-production-marketplace` | planned-empty | Vyroba, servisna operativa, sklad, seriove cisla, kvalita, material. |
+| `agevolt-support-helpdesk-marketplace` | `support-helpdesk` | `https://github.com/AgeVolt/agevolt-support-helpdesk-marketplace` | planned-empty | Support, helpdesk, incidenty, odpovede, eskalacie, support KB. |
+| `agevolt-product-myagevolt-marketplace` | `product-myagevolt` | `https://github.com/AgeVolt/agevolt-product-myagevolt-marketplace` | planned-empty | myAgeVolt portal, portalova KB, produktove pravidla, developer tools. |
+| `agevolt-product-chargers-marketplace` | `product-chargers` | `https://github.com/AgeVolt/agevolt-product-chargers-marketplace` | planned-empty | Nabijacky, cenniky, navody, produktova KB, sluzby okolo zariadeni. |
+| `agevolt-public-user-tools-marketplace` | `public-user-tools` | `https://github.com/AgeVolt/agevolt-public-user-tools-marketplace` | planned-empty | Public-safe pouzivatelske navody, troubleshooting a verejne integracie. |
 
 ## Vyber Marketplace
 

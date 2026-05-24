@@ -33,6 +33,7 @@ Marketplace musi mat tri zosuladene nazvy:
 | --- | --- | --- |
 | SharePoint priecinok | `agevolt-<oblast>-marketplace` | `agevolt-finance-admin-marketplace` |
 | Git repo | `AgeVolt/agevolt-<oblast>-marketplace` | `AgeVolt/agevolt-creator-marketplace` |
+| Codex marketplace ID | kratky slug bez `agevolt-` a bez `-marketplace` | `finance-admin` |
 | Codex display name | slug bez finalneho `-marketplace`, citatelny Title Case | `AgeVolt Creator` |
 
 Pravidla:
@@ -40,13 +41,15 @@ Pravidla:
 - Slug vzdy konci na `-marketplace`.
 - Slug pouziva iba lowercase ASCII, cisla a pomlcky.
 - SharePoint priecinok a Git repo musia mat rovnaky slug.
-- `marketplace.json` top-level `name` musi byt rovnaky slug.
 - `marketplace.yaml` `id` musi byt rovnaky slug.
+- `marketplace.yaml` `codex_marketplace_id` musi byt kratky Codex marketplace ID.
+- `.agents/plugins/marketplace.json` top-level `name` musi byt kratky Codex marketplace ID, nie dlhy Git/SharePoint slug.
+- Kratky Codex marketplace ID sa zobrazuje vedla pluginu v Codex UI, preto nesmie obsahovat `agevolt` ani `marketplace`, ak to nie je nutne.
 - Codex display name vznikne zo slugu bez posledneho `-marketplace`: `agevolt-creator-marketplace` -> `AgeVolt Creator`.
 - Display name nikdy nekonci slovom `Marketplace`, ak je to iba technicky suffix slugu.
 - `interface.displayName` nesmie byt rovnaky pre viac AgeVolt marketplaces, inak je Codex UI neprehladne.
 - Nepouzivaj genericke display names ako `Built by AgeVolt`.
-- Priklady: `agevolt-finance-admin-marketplace` -> `AgeVolt Finance Admin`; `agevolt-product-myagevolt-marketplace` -> `AgeVolt Product myAgeVolt`.
+- Priklady: `agevolt-finance-admin-marketplace` -> Codex ID `finance-admin`, display `AgeVolt Finance Admin`; `agevolt-product-myagevolt-marketplace` -> Codex ID `product-myagevolt`, display `AgeVolt Product myAgeVolt`.
 
 ## Standardny Plugin
 
@@ -60,6 +63,28 @@ plugins/<plugin-id>/
 ```
 
 Aj v plugine vytvaraj iba priecinky s realnym obsahom. `skills/` vytvor, ked plugin obsahuje skill. `kb/` vytvor, ked skill potrebuje reference alebo pravidla. `mcp/` vytvor az ked existuje realny server alebo konfiguracia. V public Git Codex baliku musi mat plugin navyse `.codex-plugin/plugin.json`. Ak ma plugin MCP konfiguraciu pre Codex, pouzi Codex kompatibilny subor `.mcp.json` v plugin package.
+
+## Plugin UI Standard
+
+Kazdy AgeVolt plugin ma mat v `.codex-plugin/plugin.json`:
+
+- kratke `interface.displayName`, idealne do 24 znakov,
+- `interface.developerName: "AgeVolt"`,
+- `interface.brandColor: "#280046"`,
+- `interface.composerIcon: "./assets/icon.png"`,
+- `interface.logo: "./assets/logo.png"`,
+- realne subory `assets/icon.png` a `assets/logo.png` s AV logom.
+
+Kazdy skill, ktory ma `agents/openai.yaml`, ma mat:
+
+```yaml
+interface:
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/logo.png"
+  brand_color: "#280046"
+```
+
+Subory `assets/icon.png` a `assets/logo.png` drzte pri danom skille, aby cesty fungovali aj po instalacii do Codex cache. Nepouzivaj genericke emoji, nahodne ikonky alebo ine logo, ak pouzivatel explicitne neziada branded plugin tretej strany.
 
 ## Pravidlo Urovni
 

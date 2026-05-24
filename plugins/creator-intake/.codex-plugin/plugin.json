@@ -1,6 +1,6 @@
 {
   "name": "creator-intake",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Public-safe intake plugin for deciding whether an AgeVolt AI request should become a marketplace, plugin, skill, KB, MCP, rule, personal rule, script, or no new artifact.",
   "author": {
     "name": "AgeVolt",
@@ -32,6 +32,8 @@
     ],
     "websiteURL": "https://www.agevolt.com",
     "brandColor": "#280046",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
     "defaultPrompt": [
       "Rozhodni, aky AgeVolt AI artefakt mam vytvorit.",
       "Pridaj plugin alebo skill do existujuceho marketplace.",

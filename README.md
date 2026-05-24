@@ -42,7 +42,7 @@ CLI equivalent:
 
 ```powershell
 codex plugin marketplace add AgeVolt/agevolt-creator-marketplace
-codex plugin add creator-intake@agevolt-creator-marketplace
+codex plugin add creator-intake@creator
 ```
 
 ## Upgrade
@@ -50,7 +50,7 @@ codex plugin add creator-intake@agevolt-creator-marketplace
 Because this is a Git marketplace, Codex can upgrade it through the normal marketplace upgrade flow.
 
 ```powershell
-codex plugin marketplace upgrade agevolt-creator-marketplace
+codex plugin marketplace upgrade creator
 ```
 
 ## Public-Safe Rules

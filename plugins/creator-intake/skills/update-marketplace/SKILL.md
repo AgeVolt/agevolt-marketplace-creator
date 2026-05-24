@@ -119,7 +119,7 @@ Potom:
 git -C "C:\AiAgent\repos\<marketplace-id>" add .
 git -C "C:\AiAgent\repos\<marketplace-id>" commit -m "<kratky popis>"
 git -C "C:\AiAgent\repos\<marketplace-id>" push
-codex plugin marketplace upgrade <marketplace-id>
+codex plugin marketplace upgrade <codex-marketplace-id>
 ```
 
 ## Stop Pravidla
