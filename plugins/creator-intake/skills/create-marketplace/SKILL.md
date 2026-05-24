@@ -54,6 +54,7 @@ Ak marketplace alebo plugin potrebuje MCP, navrhni ho tak, aby Codex vedel volat
 - Ak historicky endpoint pouziva bodky, nech server vystavi Codex aliasy bez bodiek.
 - Skill k MCP musi zakazat priame HTTP fallbacky cez shell a ma zastavit, ak MCP tool nie je viditelny.
 - `agents/openai.yaml` pri kazdom MCP skille ma mat `dependencies.tools` s MCP serverom.
+- HTTP/streamable HTTP MCP server musi mat overeny handshake: `initialize`, `notifications/initialized` bez JSON-RPC response, `tools/list` a realny read-only `tools/call`.
 
 ## Minimalny Postup
 

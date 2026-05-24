@@ -129,6 +129,16 @@ plugins/<plugin-id>/.codex-plugin/plugin.json
 
 `plugin.json` ma obsahovat `mcpServers: "./.mcp.json"` iba ked `.mcp.json` existuje.
 
+## MCP Transport Handshake Standard
+
+Pri HTTP/streamable HTTP MCP serveri nestaci, ze endpoint funguje cez `curl` alebo REST fallback. Server musi prejst realnym MCP JSON-RPC handshake:
+
+- `initialize` s `id` vracia validnu JSON-RPC response.
+- `notifications/initialized` bez `id` je JSON-RPC notification a nesmie vratit JSON-RPC response s `id: null`; vrat prazdne telo s HTTP `202` alebo `204`.
+- `tools/list` po handshake vracia Codex kompatibilne nazvy toolov.
+- `tools/call` musi fungovat priamo s tymi istymi nazvami, ktore vracia `tools/list`.
+- Ak server odpoveda na notification ako na request, Codex nemusi MCP v chate vobec vystavit, aj ked plugin vyzera nainstalovany.
+
 ## Kedy Vytvorit Novy Marketplace
 
 Novy marketplace vytvor iba ked aspon jedna vec plati:

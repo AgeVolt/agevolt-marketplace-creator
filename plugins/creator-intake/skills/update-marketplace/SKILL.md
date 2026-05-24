@@ -107,6 +107,7 @@ Pri kazdom `new-mcp`, `update-mcp`, `new-skill` alebo `update-skill`, ktory pouz
 - Ak backend potrebuje stare bodkovane cesty, nech ostanu ako interne HTTP endpointy; MCP `tools/list` ma vracat Codex kompatibilne aliasy.
 - Skill ma instruovat agenta, aby volal priamo MCP tooly a neobchadzal ich cez `curl`, `Invoke-RestMethod` alebo priame HTTP endpointy.
 - Ak MCP tooly nie su v chate viditelne, skill ma zastavit a vypytat refresh/restart Codexu alebo upgrade/reinstall pluginu.
+- HTTP/streamable HTTP MCP server musi spravne ignorovat JSON-RPC notifications: `notifications/initialized` bez `id` nesmie vratit JSON-RPC response s `id: null`.
 - `skills/<skill-id>/agents/openai.yaml` ma deklarovat MCP dependency:
 
 ```yaml
@@ -127,6 +128,13 @@ Pred pushom spusti:
 python "C:\Users\Ján Zuštiak\.codex\skills\.system\skill-creator\scripts\quick_validate.py" "<skill-dir>"
 python "C:\Users\Ján Zuštiak\.codex\skills\.system\plugin-creator\scripts\validate_plugin.py" "<plugin-dir>"
 ```
+
+Pri MCP navyse over:
+
+- `initialize` vrati validnu JSON-RPC response,
+- `notifications/initialized` bez `id` vrati prazdne telo s HTTP `202` alebo `204`,
+- `tools/list` vrati Codex kompatibilne nazvy bez bodiek,
+- jeden read-only `tools/call` funguje priamo cez MCP.
 
 Skontroluj JSON:
 

@@ -61,6 +61,7 @@ Kazdy novy alebo upravovany MCP pre Codex musi byt navrhnuty tak, aby sa dal vol
 - Skill, ktory pouziva MCP, musi povedat, ze ma volat priamo MCP tooly. Nesmie odporucat `curl`, `Invoke-RestMethod` alebo priame `/index.php/...` fallbacky pre bezne user tasky.
 - Ak MCP tooly v aktualnom chate nie su viditelne, agent ma zastavit a navrhnut refresh/restart Codexu alebo upgrade/reinstall pluginu.
 - `agents/openai.yaml` pri MCP skille ma deklarovat `dependencies.tools` s `type: "mcp"`, `value`, `transport` a `url`.
+- HTTP/streamable HTTP MCP server musi prejst handshake testom: `initialize` vracia JSON-RPC response, `notifications/initialized` bez `id` nevracia JSON-RPC response, `tools/list` vracia kompatibilne nazvy a `tools/call` funguje priamo.
 
 ## Stop Pravidlo
 

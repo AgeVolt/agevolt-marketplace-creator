@@ -38,6 +38,8 @@ MCP pre Codex musi byt navrhnuty ako priamo volatelny tool surface.
 - Pri neviditelnom MCP v chate zastav a navrhni refresh/restart Codexu, `codex plugin marketplace upgrade <id>` alebo reinstall pluginu.
 - Skill s MCP ma mat v `agents/openai.yaml` `dependencies.tools` s `type: "mcp"`, server `value`, `transport` a `url`.
 - Write tools musia mat preview/execute model a execute musi vyzadovat `confirmation_id`.
+- HTTP/streamable HTTP MCP server musi spravne obsluzit JSON-RPC notifications: request bez `id`, napriklad `notifications/initialized`, nesmie vratit JSON-RPC response s `id: null`.
+- Pred odovzdanim MCP over minimalne `initialize`, `notifications/initialized`, `tools/list` a jeden realny read-only `tools/call`.
 
 ## Required Output Pri Nejasnej Poziadavke
 
