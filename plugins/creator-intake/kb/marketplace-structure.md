@@ -95,6 +95,40 @@ Subory `assets/icon.png` a `assets/logo.png` drzte pri danom skille, aby cesty f
 - MCP poskytuje nastroje, resources alebo prompts.
 - KB drzi znalosti, ktore by zbytocne zatazovali `SKILL.md`.
 
+## MCP Tool Naming Standard
+
+MCP server moze interne volat lubovolne API endpointy, ale tooly vystavene do Codexu musia mat nazvy, ktore model vie priamo volat.
+
+Pravidla:
+
+- Tool name: iba `A-Z`, `a-z`, `0-9`, `_`, `-`, najviac 64 znakov.
+- Nepouzivaj bodky. `sf.documents.list` je zly tool name pre Codex; pouzi `sf_documents_list`.
+- Ak kvoli kompatibilite existuju stare HTTP endpointy s bodkami, nech zostanu ako HTTP endpointy, ale MCP `tools/list` ma vracat underscore aliasy.
+- Skill ma pomenovavat priamo MCP tooly, ktore ma agent pouzit.
+- Skill nesmie odporucat obchadzanie MCP cez shell, `curl`, `Invoke-RestMethod` alebo HTTP URL fallback.
+- Ak tooly nie su viditelne, pouzivatelsky workflow sa ma zastavit a riesi sa refresh/restart Codexu alebo upgrade/reinstall pluginu.
+
+Pri skille, ktory zavisi na MCP, pridaj do `skills/<skill-id>/agents/openai.yaml`:
+
+```yaml
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "<mcp-server-id>"
+      description: "<human-readable server>"
+      transport: "streamable_http"
+      url: "https://..."
+```
+
+Pri plugine, ktory zavisi na MCP, musi existovat:
+
+```text
+plugins/<plugin-id>/.mcp.json
+plugins/<plugin-id>/.codex-plugin/plugin.json
+```
+
+`plugin.json` ma obsahovat `mcpServers: "./.mcp.json"` iba ked `.mcp.json` existuje.
+
 ## Kedy Vytvorit Novy Marketplace
 
 Novy marketplace vytvor iba ked aspon jedna vec plati:

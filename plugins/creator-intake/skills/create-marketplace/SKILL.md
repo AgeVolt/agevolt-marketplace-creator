@@ -45,6 +45,16 @@ Ak ide len o znalosti, navrhni KB.
 
 Ak ide o zive data, API, vypocet alebo zapis, navrhni MCP a skill, ktory vysvetli jeho bezpecne pouzitie.
 
+## MCP Standard Pri Navrhu
+
+Ak marketplace alebo plugin potrebuje MCP, navrhni ho tak, aby Codex vedel volat tooly priamo.
+
+- Tool names v MCP musia pouzivat iba pismena, cisla, `_` alebo `-`, maximalne 64 znakov.
+- Nepouzivaj bodkovane nazvy toolov. Napriklad pouzi `sf_documents_list`, nie `sf.documents.list`.
+- Ak historicky endpoint pouziva bodky, nech server vystavi Codex aliasy bez bodiek.
+- Skill k MCP musi zakazat priame HTTP fallbacky cez shell a ma zastavit, ak MCP tool nie je viditelny.
+- `agents/openai.yaml` pri kazdom MCP skille ma mat `dependencies.tools` s MCP serverom.
+
 ## Minimalny Postup
 
 1. Vrat artifact proposal, ak nie je explicitne schvalena implementacia.

@@ -98,6 +98,27 @@ plugins/<plugin-id>/.codex-plugin/plugin.json
 
 `plugin.json` musi mat `mcpServers: "./.mcp.json"` iba ked `.mcp.json` realne existuje.
 
+## MCP Update Standard
+
+Pri kazdom `new-mcp`, `update-mcp`, `new-skill` alebo `update-skill`, ktory pouziva MCP:
+
+- MCP tool names musia byt Codex/OpenAI kompatibilne: iba pismena, cisla, `_` alebo `-`, maximalne 64 znakov.
+- Nepouzivaj bodky v MCP tool names. Z `sf.documents.list` urob `sf_documents_list`.
+- Ak backend potrebuje stare bodkovane cesty, nech ostanu ako interne HTTP endpointy; MCP `tools/list` ma vracat Codex kompatibilne aliasy.
+- Skill ma instruovat agenta, aby volal priamo MCP tooly a neobchadzal ich cez `curl`, `Invoke-RestMethod` alebo priame HTTP endpointy.
+- Ak MCP tooly nie su v chate viditelne, skill ma zastavit a vypytat refresh/restart Codexu alebo upgrade/reinstall pluginu.
+- `skills/<skill-id>/agents/openai.yaml` ma deklarovat MCP dependency:
+
+```yaml
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "<mcp-server-id>"
+      description: "<human-readable server>"
+      transport: "streamable_http"
+      url: "https://..."
+```
+
 ## Validacia
 
 Pred pushom spusti:
