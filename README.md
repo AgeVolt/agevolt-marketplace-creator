@@ -5,7 +5,7 @@ Public-safe Git marketplace for AgeVolt AI artifact creation governance.
 This repository is intentionally small. It contains only bootstrap plugin metadata and a minimal Creator Intake skill. Internal rules, examples, knowledge base, fixtures, and migration work remain in the SharePoint folder:
 
 ```text
-AI Agent/
+AI Agent/marketplaces/agevolt-marketplace-creator/
 ```
 
 ## What This Marketplace Is For

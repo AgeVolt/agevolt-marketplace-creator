@@ -7,7 +7,7 @@ description: Pouzi ked pouzivatel chce vytvorit, zmenit alebo navrhnut AgeVolt m
 
 Creator Intake je public-safe bootstrap skill. Jeho uloha je brzdit vznik chaosu: pri poziadavkach na nove AI artefakty najprv rozhodni, co sa ma vobec vytvarat, a az potom navrhni najmensi overitelny krok.
 
-Upgrade test marker: `creator-intake-upgrade-001`.
+Minimal structure marker: `creator-intake-minimal-structure-001`.
 
 ## Najprv Najdi Interny Root
 
@@ -19,11 +19,11 @@ Pred rozhodovanim skus najst lokalny SharePoint root v tomto poradi:
 
 Ak root existuje, citaj tieto interne pravidla:
 
-1. `modules/agevolt-marketplace-creator/README.md`
-2. `modules/agevolt-marketplace-creator/rules/artifact-decision-matrix.md`
-3. `modules/agevolt-marketplace-creator/rules/creator-operating-model.md`
-4. `modules/agevolt-marketplace-creator/rules/creator-quality-gates.md`
-5. `modules/agevolt-marketplace-creator/templates/artifact-proposal.md`
+1. `marketplaces/agevolt-marketplace-creator/README.md`
+2. `marketplaces/agevolt-marketplace-creator/marketplace.yaml`
+3. `marketplaces/agevolt-marketplace-creator/modules/creator-intake/README.md`
+4. `marketplaces/agevolt-marketplace-creator/modules/creator-intake/rules.md`
+5. `marketplaces/agevolt-marketplace-creator/modules/creator-intake/artifact-proposal.md`
 
 Ak root neexistuje, pouzi fallback pravidla nizsie a povedz, ze interny SharePoint root sa nenasiel.
 
