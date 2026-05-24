@@ -22,6 +22,7 @@ Ak root existuje, precitaj:
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-structure.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-catalog.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/git-update-flow.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/mcp-build-runbook.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/artifact-proposal.md`
 
 Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
@@ -29,6 +30,7 @@ Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 - `../../kb/marketplace-structure.md`
 - `../../kb/marketplace-catalog.md`
 - `../../kb/git-update-flow.md`
+- `../../kb/mcp-build-runbook.md`
 - `../../kb/artifact-proposal.md`
 
 Ak ani tie nie su dostupne, pouzi pravidla v tomto SKILL.md a povedz, ze interny SharePoint root sa nenasiel.
@@ -52,9 +54,11 @@ Ak marketplace alebo plugin potrebuje MCP, navrhni ho tak, aby Codex vedel volat
 - Tool names v MCP musia pouzivat iba pismena, cisla, `_` alebo `-`, maximalne 64 znakov.
 - Nepouzivaj bodkovane nazvy toolov. Napriklad pouzi `sf_documents_list`, nie `sf.documents.list`.
 - Ak historicky endpoint pouziva bodky, nech server vystavi Codex aliasy bez bodiek.
-- Skill k MCP musi zakazat priame HTTP fallbacky cez shell a ma zastavit, ak MCP tool nie je viditelny.
+- Skill k MCP musi zakazat priame HTTP fallbacky cez shell, citanie `.codex/.credentials.json` a rucne skladanie bearer tokenu.
+- Ak MCP tool nie je viditelny, skill ma zastavit user workflow, spravit/odporucit `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom vyziadat novy chat alebo refresh/restart Codexu.
 - `agents/openai.yaml` pri kazdom MCP skille ma mat `dependencies.tools` s MCP serverom.
 - HTTP/streamable HTTP MCP server musi mat overeny handshake: `initialize`, `notifications/initialized` bez JSON-RPC response, `tools/list` a realny read-only `tools/call`.
+- Pri private MCP pouzi `mcp-build-runbook.md` a `mcp-websupport/references/entra-private-mcp-auth.md`.
 
 ## Minimalny Postup
 

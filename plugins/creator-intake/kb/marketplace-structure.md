@@ -105,8 +105,8 @@ Pravidla:
 - Nepouzivaj bodky. `sf.documents.list` je zly tool name pre Codex; pouzi `sf_documents_list`.
 - Ak kvoli kompatibilite existuju stare HTTP endpointy s bodkami, nech zostanu ako HTTP endpointy, ale MCP `tools/list` ma vracat underscore aliasy.
 - Skill ma pomenovavat priamo MCP tooly, ktore ma agent pouzit.
-- Skill nesmie odporucat obchadzanie MCP cez shell, `curl`, `Invoke-RestMethod` alebo HTTP URL fallback.
-- Ak tooly nie su viditelne, pouzivatelsky workflow sa ma zastavit a nesmie prejst na HTTP fallback. Najprv over MCP registraciu a OAuth login; pri private AgeVolt MCP pouzi `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom novy chat/refresh/restart Codexu. Upgrade/reinstall ries az po tom.
+- Skill nesmie odporucat obchadzanie MCP cez shell, `curl`, `Invoke-RestMethod`, HTTP URL fallback, citanie `.codex/.credentials.json` alebo rucny bearer token.
+- Ak tooly nie su viditelne, pouzivatelsky workflow sa ma zastavit a nesmie prejst na HTTP/token fallback. Najprv over MCP registraciu a OAuth login; pri private AgeVolt MCP pouzi `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom novy chat/refresh/restart Codexu. Upgrade/reinstall ries az po tom.
 
 Pri skille, ktory zavisi na MCP, pridaj do `skills/<skill-id>/agents/openai.yaml`:
 
@@ -145,6 +145,8 @@ codex mcp list
 ```
 
 `Auth OAuth` v `codex mcp list` znamena, ze Codex ma ulozene OAuth credentials. Browser moze ukazat len `Authentication complete`, ak pouzivatel uz ma aktivny MS365 SSO session; to je uspesny stav. Po prvom login treba otvorit novy chat alebo refreshnut/restartovat Codex, aby sa MCP tooly nacitali do aktualneho tool surface.
+
+Neoveruj produkcny private MCP citanim `%USERPROFILE%\.codex\.credentials.json`. End-to-end overenie rob cez novy chat alebo izolovany `codex exec`, aby sa potvrdilo, ze tooly su realne vystavene do Codex tool surface.
 
 ## MCP Transport Handshake Standard
 

@@ -67,10 +67,10 @@ Pridaj iba realne potrebne casti:
 ```text
 skills/<skill-id>/SKILL.md
 skills/<skill-id>/agents/openai.yaml
-kb/*.md
-.mcp.json
-mcp/README.md
-.codex-plugin/plugin.json
+  kb/*.md
+  .mcp.json
+  mcp/README.md
+  .codex-plugin/plugin.json
 ```
 
 Pravidla:
@@ -79,6 +79,7 @@ Pravidla:
 - `kb/` vytvor iba ked plugin ma realnu knowledge base alebo reference.
 - `.mcp.json` vytvor iba ked plugin ma MCP server.
 - `mcp/` vytvor iba ked treba dokumentovat alebo drzat zdroj MCP casti.
+- Pri MCP si precitaj `creator-intake/kb/mcp-build-runbook.md` a pouzi ho ako checklist.
 - Nevytvaraj prazdne `templates/`, `tests/`, `assets/`, `scripts/` ani `mcp/`.
 
 V Git repozitari `<marketplace-id>` pridaj public-safe plugin:
@@ -175,4 +176,5 @@ Po pushi:
 - skontroluj `~/.codex/config.toml` `last_revision`,
 - skontroluj cache `~/.codex/plugins/cache/<codex-marketplace-id>/<plugin-id>/<version>/`,
 - pri MCP over, ze `.mcp.json` je v cache a plugin manifest ma `mcpServers`,
-- pri private MCP over, ze `codex mcp list` ukazuje `Auth OAuth`; `Authentication complete` v browseri bez zadania hesla znamena uspesny MS365 SSO callback.
+- pri private MCP over, ze `codex mcp list` ukazuje `Auth OAuth`; `Authentication complete` v browseri bez zadania hesla znamena uspesny MS365 SSO callback,
+- private MCP E2E over cez novy chat alebo `codex exec`; nikdy nie citanim `.codex/.credentials.json` a rucnym bearer tokenom.

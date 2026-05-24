@@ -7,11 +7,14 @@ description: Pouzi ked treba vytvorit, upravit, opravit, presunut alebo deploynu
 
 Tento skill je pre AgeVolt MCP servery hostovane ako PHP endpointy na WebSupporte. Ciel je, aby MCP fungoval priamo v Codexe ako tool surface, nie cez shell, `curl`, `Invoke-RestMethod` alebo fallback HTTP endpointy.
 
+Pred vytvorenim alebo vacsou upravou MCP precitaj aj `../../kb/mcp-build-runbook.md`. Pri private data MCP precitaj aj `references/entra-private-mcp-auth.md`.
+
 ## Bezpecnost
 
 - Nikdy nevkladaj FTP hesla, API tokeny ani ine secrets do public Git repozitara.
 - Nikdy nepouzivaj heslo poslane v chate. Ak ho pouzivatel posle, upozorni ho, ze ho ma zmenit, a pokracuj iba bezpecnym admin flowom.
 - Nikdy nevypisuj heslo do terminalu, chatu, commit message ani logu.
+- Nikdy necitaj `%USERPROFILE%\.codex\.credentials.json` a nikdy nepouzivaj rucne vybraty access token na bezny user workflow.
 - Public Git moze obsahovat iba bez-secrets skill, KB, `.mcp.json`, README, deployment postup a kod, ktory neobsahuje tajomstva.
 - Spolocne WebSupport pristupy citaj iba zo SharePoint-only private reference suboru.
 
@@ -124,7 +127,7 @@ Read-only tool moze bezat priamo.
 4. Pri novom MCP navrhni minimalny tool surface a prvy read-only smoke test.
 5. V PHP implementuj najprv `initialize`, `notifications/initialized`, `tools/list`, `tools/call`, `/health`.
 6. Pridaj `.mcp.json` do plugin rootu a `mcpServers: "./.mcp.json"` do `.codex-plugin/plugin.json`.
-7. Skill, ktory MCP pouziva, musi hovorit o priamych MCP tooloch a nesmie odporucat HTTP fallbacky.
+7. Skill, ktory MCP pouziva, musi hovorit o priamych MCP tooloch a nesmie odporucat HTTP fallbacky, citanie `.codex/.credentials.json` ani rucne bearer tokeny.
 8. Ak MCP pristupuje k private datam, pouzi shared AgeVolt OAuth Broker `https://documents.agevolt.com/mcp/auth` a nastav MCP audience na jeho public MCP URL.
 9. Pri zmene public pluginu bumpni verziu a pushni Git marketplace.
 10. Pri zmene private server_code zapis zmenu do SharePoint revision history.
@@ -136,6 +139,7 @@ Read-only tool moze bezat priamo.
 3. Deployuj obsah `server_code/php/` na WebSupport target.
 4. Po deployi otestuj `/health`.
 5. Otestuj MCP handshake a minimalny read-only `tools/call`.
+6. Pri private MCP otestuj Codex E2E cez `codex mcp login`, `codex mcp list` a novy chat alebo `codex exec`; nepouzivaj rucne citanie credentials.
 
 Minimalna validacia:
 
@@ -156,6 +160,8 @@ codex mcp list
 ```
 
 `codex mcp list` ma ukazat MCP server ako `Auth OAuth`. Browser nemusi pytat heslo, ak je pouzivatel uz prihlaseny do MS365; stranka `Authentication complete` znamena uspesny callback a ulozenie prihlasenia v Codexe.
+
+Nikdy po login teste necitaj `.codex/.credentials.json` a nepokracuj rucnym `Invoke-WebRequest` s bearer tokenom. Ak tool surface v aktualnom chate stale nevidi MCP tooly, otvor novy chat alebo spusti izolovany `codex exec` test. User workflow musi bezat cez MCP tool surface.
 
 Ak MCP nie je v novom chate vystaveny, postupuj v tomto poradi:
 

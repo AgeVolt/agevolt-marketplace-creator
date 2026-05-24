@@ -2,7 +2,7 @@
 
 Public-safe Git marketplace for AgeVolt AI artifact creation governance.
 
-This repository is intentionally small. It contains only bootstrap plugin metadata and a minimal Creator Intake skill. Internal rules, examples, knowledge base, fixtures, and migration work remain in the SharePoint folder:
+This repository is intentionally small and public-safe. It contains the Creator Intake plugin, its public-safe skills, KB, and MCP build rules needed for Codex marketplace updates. Secrets, private server configs, examples with customer data, fixtures, and migration work remain in the SharePoint folder:
 
 ```text
 AI Agent/marketplaces/agevolt-creator-marketplace/
@@ -58,7 +58,8 @@ codex plugin marketplace upgrade creator
 This repo may contain:
 
 - plugin manifests,
-- minimal bootstrap skills,
+- public-safe Creator skills,
+- public-safe Creator KB and MCP build rules,
 - public install and test instructions.
 
 This repo must not contain:

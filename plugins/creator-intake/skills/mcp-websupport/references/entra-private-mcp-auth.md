@@ -136,7 +136,7 @@ Nezamienaj tieto tri veci:
 
 Pri private AgeVolt MCP pouzi shared AgeVolt OAuth Broker. Priamy Microsoft Entra authorization server nepouzivaj v MCP protected resource metadata, lebo Codex MCP login pouziva Dynamic Client Registration a Entra ID ho pre tieto public klienty neposkytuje.
 
-Neobchadzaj OAuth ulozenym admin heslom, refresh tokenom alebo dlhodobym user tokenom v PHP.
+Neobchadzaj OAuth ulozenym admin heslom, refresh tokenom, dlhodobym user tokenom v PHP ani citanim Codex credentials suboru. V beznom user workflowe ani v skill instrukciach nikdy nepouzivaj `%USERPROFILE%\.codex\.credentials.json`, `access_token` z neho, `Invoke-WebRequest` s bearer tokenom alebo `curl` ako nahradu MCP tool surface.
 
 AgeVolt overenie 2026-05-24:
 
@@ -149,6 +149,7 @@ AgeVolt overenie 2026-05-24:
 - Po nasadeni AgeVolt OAuth Broker na `https://documents.agevolt.com/mcp/auth`, prepojeni SuperFaktura protected resource metadata na broker a nastaveni Entra callbacku `https://documents.agevolt.com/mcp/auth/callback/entra` login presiel.
 - Codex ulozil OAuth credentials a novy `codex exec` proces uspesne zavolal MCP tool `sf_documents_list`.
 - Pri druhom teste browser ukazal iba `Authentication complete`, lebo pouzivatel uz mal aktivny MS365 SSO session. To je uspesny stav, nie chyba.
+- V dalsom teste agent po login fallbacku cital `.codex/.credentials.json` a volal MCP rucne cez `Invoke-WebRequest`. To je zakazane pre bezny user workflow; spravny postup je login, `Auth OAuth`, novy chat alebo `codex exec`, aby sa potvrdilo realne vystavenie MCP toolu.
 
 Pravidlo: Entra auth pre private PHP MCP najprv skusaj na samostatnom test endpointe, napriklad `/mcp/<server>-auth-test/mcp`, ak endpoint uz pouzivaju bezni pouzivatelia. Na nepouzivanom pilote moze ostat auth zapnuta, kym sa overuje klientsky OAuth flow.
 
@@ -192,4 +193,5 @@ Pred nasadenim:
 - request s validnym broker tokenom pre per-MCP audience prejde,
 - request s tokenom pre Microsoft Graph alebo inu app odmietne `audience is not allowed`,
 - request z ineho tenant/domain odmietne.
-- novy Codex/ChatGPT chat po instalacii pluginu realne vidi MCP tooly a nepada do fallback HTTP volani.
+- novy Codex/ChatGPT chat po instalacii pluginu realne vidi MCP tooly a nepada do fallback HTTP volani,
+- ziadny skill ani user workflow necita `.codex/.credentials.json` a nepouziva rucny bearer token.

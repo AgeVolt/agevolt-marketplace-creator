@@ -22,12 +22,14 @@ Ak root existuje, precitaj:
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-structure.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-catalog.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/git-update-flow.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/mcp-build-runbook.md`
 
 Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 
 - `../../kb/marketplace-structure.md`
 - `../../kb/marketplace-catalog.md`
 - `../../kb/git-update-flow.md`
+- `../../kb/mcp-build-runbook.md`
 
 Ak ani tie nie su dostupne, pouzi pravidla v tomto SKILL.md a povedz, ze interny SharePoint root sa nenasiel.
 
@@ -105,8 +107,8 @@ Pri kazdom `new-mcp`, `update-mcp`, `new-skill` alebo `update-skill`, ktory pouz
 - MCP tool names musia byt Codex/OpenAI kompatibilne: iba pismena, cisla, `_` alebo `-`, maximalne 64 znakov.
 - Nepouzivaj bodky v MCP tool names. Z `sf.documents.list` urob `sf_documents_list`.
 - Ak backend potrebuje stare bodkovane cesty, nech ostanu ako interne HTTP endpointy; MCP `tools/list` ma vracat Codex kompatibilne aliasy.
-- Skill ma instruovat agenta, aby volal priamo MCP tooly a neobchadzal ich cez `curl`, `Invoke-RestMethod` alebo priame HTTP endpointy.
-- Ak MCP tooly nie su v chate viditelne, skill ma zakazat HTTP fallback a najprv overit registraciu + OAuth login MCP servera. Pri private AgeVolt MCP pouzi `codex mcp login <mcp-server-id> --scopes MCP.Access`; po uspesnom login ma `codex mcp list` ukazat `Auth OAuth`. Potom otvor novy chat alebo sprav refresh/restart Codexu, aby sa tool surface nacital.
+- Skill ma instruovat agenta, aby volal priamo MCP tooly a neobchadzal ich cez `curl`, `Invoke-RestMethod`, priame HTTP endpointy, `.codex/.credentials.json` alebo rucne bearer tokeny.
+- Ak MCP tooly nie su v chate viditelne, skill ma zakazat HTTP/token fallback a najprv overit registraciu + OAuth login MCP servera. Pri private AgeVolt MCP pouzi `codex mcp login <mcp-server-id> --scopes MCP.Access`; po uspesnom login ma `codex mcp list` ukazat `Auth OAuth`. Potom otvor novy chat alebo sprav refresh/restart Codexu, aby sa tool surface nacital. Nepokracuj rucnym volanim MCP cez shell.
 - Ak browser ukaze `Authentication complete` bez zadania hesla, ber to ako uspesny SSO login cez uz prihlaseny MS365 browser session.
 - HTTP/streamable HTTP MCP server musi spravne ignorovat JSON-RPC notifications: `notifications/initialized` bez `id` nesmie vratit JSON-RPC response s `id: null`.
 - `skills/<skill-id>/agents/openai.yaml` ma deklarovat MCP dependency:
@@ -135,7 +137,8 @@ Pri MCP navyse over:
 - `initialize` vrati validnu JSON-RPC response,
 - `notifications/initialized` bez `id` vrati prazdne telo s HTTP `202` alebo `204`,
 - `tools/list` vrati Codex kompatibilne nazvy bez bodiek,
-- jeden read-only `tools/call` funguje priamo cez MCP.
+- jeden read-only `tools/call` funguje priamo cez MCP,
+- private MCP ma `codex mcp login <mcp-server-id> --scopes MCP.Access`, `codex mcp list` = `Auth OAuth` a novy chat alebo `codex exec` vidi tool bez shell fallbacku.
 
 Skontroluj JSON:
 
