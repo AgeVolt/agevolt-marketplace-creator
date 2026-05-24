@@ -81,9 +81,11 @@ Ak historicky REST endpoint pouziva bodkovane nazvy, server moze stare endpointy
 
 ## Private Data Auth
 
-Ak MCP pristupuje k private firemnym datam, musi mat auth pred tools/list/tools/call. Preferovany AgeVolt model je Microsoft Entra ID:
+Ak MCP pristupuje k private firemnym datam, musi mat auth pred tools/list/tools/call. Preferovany AgeVolt model je spolocna Microsoft Entra ID app registration `AgeVolt MCP`:
 
-- Entra single-tenant app registration pre konkretne MCP API,
+- jedna shared single-tenant Entra app `AgeVolt MCP` pre vsetky firemne private MCP,
+- shared audience `api://772403ea-8d4f-4d26-8908-51e646b089eb`,
+- shared scope `MCP.Access`,
 - PHP MCP server ako resource server,
 - `Authorization: Bearer <access_token>`,
 - validacia JWT cez Microsoft JWKS,
@@ -115,7 +117,7 @@ Read-only tool moze bezat priamo.
 5. V PHP implementuj najprv `initialize`, `notifications/initialized`, `tools/list`, `tools/call`, `/health`.
 6. Pridaj `.mcp.json` do plugin rootu a `mcpServers: "./.mcp.json"` do `.codex-plugin/plugin.json`.
 7. Skill, ktory MCP pouziva, musi hovorit o priamych MCP tooloch a nesmie odporucat HTTP fallbacky.
-8. Ak MCP pristupuje k private datam, navrhni Entra auth a najprv over, ze cielovy klient vie ziskat a poslat Bearer token.
+8. Ak MCP pristupuje k private datam, pouzi shared Entra app `AgeVolt MCP` a najprv over, ze cielovy klient vie ziskat a poslat Bearer token pre shared audience.
 9. Pri zmene public pluginu bumpni verziu a pushni Git marketplace.
 10. Pri zmene private server_code zapis zmenu do SharePoint revision history.
 

@@ -15,23 +15,42 @@ Codex/ChatGPT MCP client
 
 PHP server nepozna heslo pouzivatela a nikdy ho nema poznat.
 
-## Entra App Registration
+## Shared AgeVolt MCP App Registration
 
-V Microsoft Entra admin center vytvor single-tenant app registration pre konkretne MCP API:
+AgeVolt pouziva jednu spolocnu single-tenant app registration pre firemne private MCP servery. Nevytvaraj novu Entra app registration pre kazdy MCP, pokial pouzivatel explicitne neschvali iny security model.
 
 ```text
-Name: AgeVolt MCP - <plugin/server name>
+Display name: AgeVolt MCP
+Application (client) ID: 772403ea-8d4f-4d26-8908-51e646b089eb
+Object ID: 30151999-1e72-4023-b24f-c185f5febbd6
+Directory (tenant) ID: f4ad79c0-38e7-4175-b1c5-1be579eac81b
 Supported account types: Accounts in this organizational directory only
 Tenant: AgeVolt
 ```
 
-Zapis:
+Spolocna Application ID URI:
 
-- Directory tenant ID,
-- Application client ID,
-- Application ID URI alebo audience,
-- exposed scope, napriklad `MCP.Access`,
-- volitelne app roles alebo group assignment pre obmedzenie pristupu.
+```text
+api://772403ea-8d4f-4d26-8908-51e646b089eb
+```
+
+Spolocny scope:
+
+```text
+MCP.Access
+```
+
+Ak `Expose an API` este nie je hotove, v Entra admin center nastav:
+
+1. `Expose an API` -> `Set` Application ID URI na `api://772403ea-8d4f-4d26-8908-51e646b089eb`.
+2. `Add a scope`:
+   - Scope name: `MCP.Access`
+   - Who can consent: `Admins only`
+   - Admin consent display name: `Access AgeVolt MCP`
+   - Admin consent description: `Allows approved clients to access AgeVolt private MCP servers.`
+   - State: `Enabled`
+
+Volitelne pre role/oddelenia pridaj app roles alebo pouzi group assignment v Enterprise application `AgeVolt MCP`.
 
 Pre AgeVolt tenant bol discovery overeny cez:
 
@@ -60,7 +79,10 @@ V `server_code/php/config.local.php` zapni auth:
         'authorization_server' => 'https://login.microsoftonline.com/f4ad79c0-38e7-4175-b1c5-1be579eac81b/v2.0',
         'resource' => 'https://documents.agevolt.com/mcp/<server>/mcp',
         'protected_resource_metadata_url' => 'https://documents.agevolt.com/mcp/<server>/.well-known/oauth-protected-resource',
-        'audiences' => ['<Application client ID alebo Application ID URI>'],
+        'audiences' => [
+            'api://772403ea-8d4f-4d26-8908-51e646b089eb',
+            '772403ea-8d4f-4d26-8908-51e646b089eb',
+        ],
         'allowed_domains' => ['agevolt.com'],
         'allowed_users' => [],
         'allowed_groups' => [],
@@ -70,7 +92,9 @@ V `server_code/php/config.local.php` zapni auth:
 ],
 ```
 
-`audiences` je povinne pre private produkciu. Bez audience validacie je token validation prilis siroka.
+`audiences` je povinne pre private produkciu. Pre AgeVolt private MCP pouzi shared audience `api://772403ea-8d4f-4d26-8908-51e646b089eb`. Bez audience validacie je token validation prilis siroka.
+
+`resource` a `protected_resource_metadata_url` ostavaju per-MCP, aby klient vedel, ktory konkretny MCP endpoint chrani.
 
 ## PHP Server Requirements
 
@@ -109,6 +133,6 @@ Pred nasadenim:
 - `POST /mcp` bez tokenu vracia `401`,
 - `WWW-Authenticate` obsahuje `resource_metadata`,
 - `GET /.well-known/oauth-protected-resource` vracia resource metadata,
-- request s validnym tokenom pre spravne audience prejde,
+- request s validnym tokenom pre shared AgeVolt MCP audience prejde,
 - request s tokenom pre Microsoft Graph alebo inu app odmietne `audience is not allowed`,
 - request z ineho tenant/domain odmietne.
