@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creator Intake"
+  short_description: "Rozhoduje typ AgeVolt AI artefaktu."
+  default_prompt: "Navrhni spravny AgeVolt AI artefakt."

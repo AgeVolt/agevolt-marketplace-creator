@@ -1,0 +1,20 @@
+{
+  "name": "agevolt-marketplace-creator",
+  "interface": {
+    "displayName": "AgeVolt Marketplace Creator"
+  },
+  "plugins": [
+    {
+      "name": "creator-intake",
+      "source": {
+        "source": "local",
+        "path": "./plugins/creator-intake"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
