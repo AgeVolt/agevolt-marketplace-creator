@@ -1,7 +1,7 @@
 {
   "name": "agevolt-marketplace-creator",
   "interface": {
-    "displayName": "AgeVolt Marketplace Creator"
+    "displayName": "Built by AgeVolt"
   },
   "plugins": [
     {
