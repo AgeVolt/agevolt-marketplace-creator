@@ -1,6 +1,6 @@
 {
   "name": "creator-intake",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Public-safe intake plugin for deciding whether an AgeVolt AI request should become a marketplace, plugin, skill, KB, MCP, rule, personal rule, script, or no new artifact.",
   "author": {
     "name": "AgeVolt",
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "Creator Intake",
     "shortDescription": "Rozhoduje typ AgeVolt AI artefaktu.",
-    "longDescription": "Creator Intake je public-safe vstupna brana pre AgeVolt Creator. Pri poziadavkach na nove marketplaces, pluginy, skills, KB, MCP, pravidla alebo migraciu najprv rozhodne spravny typ artefaktu, najde lokalny SharePoint AI Agent root v minimalnej marketplaces strukture a pripravi artifact proposal namiesto nahodnej implementacie. Pri MCP vyzaduje Codex kompatibilne nazvy toolov a zakazuje priame HTTP fallbacky v user workflowoch.",
+    "longDescription": "Creator Intake je public-safe vstupna brana pre AgeVolt Creator. Pri poziadavkach na nove marketplaces, pluginy, skills, KB, MCP, pravidla alebo migraciu najprv rozhodne spravny typ artefaktu, najde lokalny SharePoint AI Agent root v minimalnej marketplaces strukture a pripravi artifact proposal namiesto nahodnej implementacie. Pri MCP vyzaduje Codex kompatibilne nazvy toolov, spravny MCP handshake, server_code pri konkretnom plugine a zakazuje priame HTTP fallbacky v user workflowoch.",
     "developerName": "AgeVolt",
     "category": "Productivity",
     "capabilities": [
@@ -37,7 +37,8 @@
     "defaultPrompt": [
       "Rozhodni, aky AgeVolt AI artefakt mam vytvorit.",
       "Pridaj plugin alebo skill do existujuceho marketplace.",
-      "Skontroluj, ci tato poziadavka patri do marketplace, pluginu, skillu, KB alebo MCP."
+      "Skontroluj, ci tato poziadavka patri do marketplace, pluginu, skillu, KB alebo MCP.",
+      "Vytvor alebo oprav AgeVolt MCP server na WebSupporte."
     ]
   }
 }

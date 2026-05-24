@@ -55,6 +55,8 @@ Ak ani tie nie su dostupne, pouzi fallback pravidla nizsie a povedz, ze interny 
 
 Kazdy novy alebo upravovany MCP pre Codex musi byt navrhnuty tak, aby sa dal volat priamo ako tool, nie cez shell alebo HTTP fallback.
 
+Ak poziadavka spomina WebSupport, PHP, FTP, deploy endpointu, `server_code`, `tools/list`, `tools/call` alebo MCP server hostovany cez AgeVolt WebSupport, pouzi aj skill `mcp-websupport`.
+
 - MCP tool names musia byt Codex/OpenAI kompatibilne: iba pismena, cisla, `_` alebo `-`, maximalne 64 znakov.
 - Nepouzivaj bodky v MCP tool names. Pouzi napriklad `sf_documents_list`, nie `sf.documents.list`.
 - Ak existujuci backend alebo HTTP endpoint pouziva bodkovane nazvy, MCP server ma vystavit underscore aliasy; stare endpointy mozu ostat interne alebo kompatibilne.
