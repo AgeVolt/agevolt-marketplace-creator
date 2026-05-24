@@ -31,6 +31,8 @@ Ak private reference chyba, zastav a vypytaj si doplnenie pristupov alebo potvrd
 
 Pri MS365/Entra administracii nikdy neziadaj ani nepouzivaj admin heslo v chate. Admin sa ma prihlasit interaktivne v Microsoft Entra admin center, `az login` alebo inom schvalenom bezpečnom flowe s MFA.
 
+WebSupport FTP root pre AgeVolt MCP je verejny root `https://documents.agevolt.com/mcp/`. Konkretny MCP server deployuj do vlastneho podadresara, napriklad `/superfaktura`. Shared OAuth broker deployuj do `/auth`.
+
 ## Kam Patri MCP
 
 Kazdy MCP patri pod konkretny plugin, nie na root marketplace:
@@ -81,15 +83,15 @@ Ak historicky REST endpoint pouziva bodkovane nazvy, server moze stare endpointy
 
 ## Private Data Auth
 
-Ak MCP pristupuje k private firemnym datam, musi mat auth pred tools/list/tools/call. Preferovany AgeVolt model je spolocna Microsoft Entra ID app registration `AgeVolt MCP`:
+Ak MCP pristupuje k private firemnym datam, musi mat auth pred tools/list/tools/call. Preferovany AgeVolt model je spolocny AgeVolt OAuth Broker napojeny na jednu Microsoft Entra ID app registration `AgeVolt MCP`:
 
-- jedna shared single-tenant Entra app `AgeVolt MCP` pre vsetky firemne private MCP,
-- shared audience `api://772403ea-8d4f-4d26-8908-51e646b089eb`,
-- shared scope `MCP.Access`,
-- PHP MCP server ako resource server,
+- jedna shared single-tenant Entra app `AgeVolt MCP` pre prihlasenie pouzivatela,
+- jeden shared broker `https://documents.agevolt.com/mcp/auth`,
+- kazdy MCP ma vlastny resource/audience, napriklad `https://documents.agevolt.com/mcp/superfaktura/mcp`,
+- PHP MCP server validuje brokerom vydany JWT cez broker JWKS,
+- access token je kratkodoby, refresh token je dlhodoby pre bezudrzbove pouzivanie v Codexe,
 - `Authorization: Bearer <access_token>`,
-- validacia JWT cez Microsoft JWKS,
-- povinna kontrola `issuer`, `tenant`, `audience`, expiracie a podpisu,
+- povinna kontrola `issuer`, `audience`, expiracie, podpisu a scope,
 - volitelne `required_scopes`, `required_roles`, `allowed_groups` alebo `allowed_users`.
 
 Precitaj detailny postup:
@@ -98,13 +100,11 @@ Precitaj detailny postup:
 references/entra-private-mcp-auth.md
 ```
 
-Produkcnu Entra ochranu nezapinaj priamo na existujucom MCP, kym nie je overene, ze cielovy MCP klient vie pocas instalacie alebo prveho pouzitia ziskat a poslat Bearer token pre shared AgeVolt MCP audience. Pri Codex Git marketplace bol 2026-05-24 overeny negativny vysledok: server vratil korektne `401` a `WWW-Authenticate`, ale Codex nevypytal login a MCP tooly v chate nevystavil. Preto dalsie auth pokusy rob najprv na samostatnom test endpointe a produkciu rollbackni, ak tooly zmiznu.
+Nepouzivaj priamy Microsoft Entra authorization server v protected resource metadata. Codex CLI OAuth login skusa Dynamic Client Registration a Entra ID DCR nepodporuje. Protected resource metadata MCP servera ma ukazovat na AgeVolt OAuth Broker:
 
-Pri priamom Microsoft Entra auth modely pocitaj s tym, ze Codex CLI OAuth login skusa Dynamic Client Registration. Entra ID DCR nepodporuje; overena chyba bola `Dynamic client registration not supported`. Preto priamy `authorization_servers = https://login.microsoftonline.com/.../v2.0` nestaci pre bezudrzbovy Codex login. Podporovane riesenia pre AgeVolt su:
-
-- ChatGPT Apps/Connectors flow s preddefinovanym OAuth klientom, ak cielovy surface umozni nakonfigurovat client ID/secret a redirect URI v ChatGPT sprave aplikacie.
-- AgeVolt OAuth broker medzi Codexom a Microsoft Entra, ktory voci Codexu podpori DCR alebo CIMD a voci Entra pouzije pevne registrovanu app `AgeVolt MCP`.
-- Docasny bearer token alebo vypnuta auth iba pre lokalny pilot bez private dat; nepouzivat ako standard pre firmu.
+```text
+authorization_servers: ["https://documents.agevolt.com/mcp/auth"]
+```
 
 ## Write Flow
 
@@ -125,7 +125,7 @@ Read-only tool moze bezat priamo.
 5. V PHP implementuj najprv `initialize`, `notifications/initialized`, `tools/list`, `tools/call`, `/health`.
 6. Pridaj `.mcp.json` do plugin rootu a `mcpServers: "./.mcp.json"` do `.codex-plugin/plugin.json`.
 7. Skill, ktory MCP pouziva, musi hovorit o priamych MCP tooloch a nesmie odporucat HTTP fallbacky.
-8. Ak MCP pristupuje k private datam, pouzi shared Entra app `AgeVolt MCP`, ale auth zapinaj najprv na samostatnom test endpointe a over, ze cielovy klient vie ziskat a poslat Bearer token pre shared audience.
+8. Ak MCP pristupuje k private datam, pouzi shared AgeVolt OAuth Broker `https://documents.agevolt.com/mcp/auth` a nastav MCP audience na jeho public MCP URL.
 9. Pri zmene public pluginu bumpni verziu a pushni Git marketplace.
 10. Pri zmene private server_code zapis zmenu do SharePoint revision history.
 
