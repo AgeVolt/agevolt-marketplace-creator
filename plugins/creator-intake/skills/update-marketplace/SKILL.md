@@ -106,7 +106,8 @@ Pri kazdom `new-mcp`, `update-mcp`, `new-skill` alebo `update-skill`, ktory pouz
 - Nepouzivaj bodky v MCP tool names. Z `sf.documents.list` urob `sf_documents_list`.
 - Ak backend potrebuje stare bodkovane cesty, nech ostanu ako interne HTTP endpointy; MCP `tools/list` ma vracat Codex kompatibilne aliasy.
 - Skill ma instruovat agenta, aby volal priamo MCP tooly a neobchadzal ich cez `curl`, `Invoke-RestMethod` alebo priame HTTP endpointy.
-- Ak MCP tooly nie su v chate viditelne, skill ma zastavit a vypytat refresh/restart Codexu alebo upgrade/reinstall pluginu.
+- Ak MCP tooly nie su v chate viditelne, skill ma zakazat HTTP fallback a najprv overit registraciu + OAuth login MCP servera. Pri private AgeVolt MCP pouzi `codex mcp login <mcp-server-id> --scopes MCP.Access`; po uspesnom login ma `codex mcp list` ukazat `Auth OAuth`. Potom otvor novy chat alebo sprav refresh/restart Codexu, aby sa tool surface nacital.
+- Ak browser ukaze `Authentication complete` bez zadania hesla, ber to ako uspesny SSO login cez uz prihlaseny MS365 browser session.
 - HTTP/streamable HTTP MCP server musi spravne ignorovat JSON-RPC notifications: `notifications/initialized` bez `id` nesmie vratit JSON-RPC response s `id: null`.
 - `skills/<skill-id>/agents/openai.yaml` ma deklarovat MCP dependency:
 

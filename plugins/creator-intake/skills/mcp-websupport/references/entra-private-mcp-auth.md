@@ -128,30 +128,27 @@ PHP MCP server musi:
 
 ## Client Reality Check
 
-Nezamienaj tieto dve veci:
+Nezamienaj tieto tri veci:
 
-1. PHP resource server validation: server vie odmietnut request bez validneho Entra tokenu.
+1. PHP resource server validation: server vie odmietnut request bez validneho broker tokenu.
 2. MCP client OAuth flow: Codex/ChatGPT klient musi vediet token ziskat a poslat.
+3. Tool surface refresh: po prvom login sa MCP tooly casto nacitaju az v novom chate alebo po refresh/restart Codexu.
 
-Ak aktualny Codex Git plugin nevie pre dany custom marketplace spustit OAuth flow, Entra auth bude serverovo spravne, ale plugin v chate neuvidi tools. Vtedy treba:
+Pri private AgeVolt MCP pouzi shared AgeVolt OAuth Broker. Priamy Microsoft Entra authorization server nepouzivaj v MCP protected resource metadata, lebo Codex MCP login pouziva Dynamic Client Registration a Entra ID ho pre tieto public klienty neposkytuje.
 
-- pouzit ChatGPT Apps/Connectors OAuth konfiguraciu, ak cielovy surface podporuje custom remote MCP OAuth,
-- alebo postavit OAuth gateway/proxy,
-- alebo ponechat MCP interne iba v sieti/VPN, kym Codex custom plugin OAuth flow nebude overeny.
-
-Neobchadzaj to ulozenym admin heslom, refresh tokenom alebo dlhodobym user tokenom v PHP.
+Neobchadzaj OAuth ulozenym admin heslom, refresh tokenom alebo dlhodobym user tokenom v PHP.
 
 AgeVolt overenie 2026-05-24:
 
 - SuperFaktura MCP na WebSupporte bol zapnuty do `auth.mode = entra`.
 - `GET /health` fungoval ako public health a ukazal `auth=entra`.
 - `POST /mcp` bez tokenu korektne vratil `401` a `WWW-Authenticate` s `resource_metadata`.
-- Codex Git marketplace po reinstall/restart nevypytal Microsoft login.
-- V novom chate sa MCP tooly `sf_documents_*` nevystavili.
-- Kedze pilot MCP v case testu nepouzivali ostatni pouzivatelia, endpoint ostal v `auth.mode = entra` a dalsi krok je rozbehat klientsky OAuth login cez Codex/ChatGPT podporovany flow.
+- Codex Git marketplace po reinstall/restart sam od seba nevypytal Microsoft login.
+- V novom chate sa MCP tooly `sf_documents_*` nevystavili, kym neprebehol explicitny `codex mcp login`.
 - Priamy `codex mcp login agevolt-superfaktura --scopes MCP.Access` proti Entra zlyhal na `Dynamic client registration not supported`.
 - Po nasadeni AgeVolt OAuth Broker na `https://documents.agevolt.com/mcp/auth`, prepojeni SuperFaktura protected resource metadata na broker a nastaveni Entra callbacku `https://documents.agevolt.com/mcp/auth/callback/entra` login presiel.
 - Codex ulozil OAuth credentials a novy `codex exec` proces uspesne zavolal MCP tool `sf_documents_list`.
+- Pri druhom teste browser ukazal iba `Authentication complete`, lebo pouzivatel uz mal aktivny MS365 SSO session. To je uspesny stav, nie chyba.
 
 Pravidlo: Entra auth pre private PHP MCP najprv skusaj na samostatnom test endpointe, napriklad `/mcp/<server>-auth-test/mcp`, ak endpoint uz pouzivaju bezni pouzivatelia. Na nepouzivanom pilote moze ostat auth zapnuta, kym sa overuje klientsky OAuth flow.
 
@@ -191,6 +188,7 @@ Pred nasadenim:
 - `GET /.well-known/oauth-protected-resource` vracia resource metadata,
 - resource metadata ukazuje `authorization_servers` na `https://documents.agevolt.com/mcp/auth`,
 - `codex mcp login <server>` prejde a `codex mcp list` ukazuje `Auth OAuth`,
+- ak browser nepytal heslo a ukazal `Authentication complete`, povazuj to za uspesny MS365 SSO callback,
 - request s validnym broker tokenom pre per-MCP audience prejde,
 - request s tokenom pre Microsoft Graph alebo inu app odmietne `audience is not allowed`,
 - request z ineho tenant/domain odmietne.

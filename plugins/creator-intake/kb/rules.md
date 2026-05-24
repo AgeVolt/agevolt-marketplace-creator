@@ -35,7 +35,7 @@ MCP pre Codex musi byt navrhnuty ako priamo volatelny tool surface.
 - Pre namespacing pouzivaj underscore, napriklad `sf_documents_list`, `sf_expenses_create_preview`.
 - Ak stary API wrapper pouziva `sf.documents.list`, server musi pridat alias `sf_documents_list` a skill ma pouzivat alias.
 - Skill nesmie odporucat `Invoke-RestMethod`, `curl`, browser URL alebo priamy `/index.php/sf.*` fallback pre bezne pouzitie.
-- Pri neviditelnom MCP v chate zastav a navrhni refresh/restart Codexu, `codex plugin marketplace upgrade <id>` alebo reinstall pluginu.
+- Pri neviditelnom MCP v chate zastav a nepouzivaj HTTP fallback. Najprv over `codex mcp list`; pri private AgeVolt MCP spusti alebo odporuc `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom novy chat/refresh/restart. Marketplace upgrade alebo reinstall ries az po overeni loginu.
 - Skill s MCP ma mat v `agents/openai.yaml` `dependencies.tools` s `type: "mcp"`, server `value`, `transport` a `url`.
 - Write tools musia mat preview/execute model a execute musi vyzadovat `confirmation_id`.
 - HTTP/streamable HTTP MCP server musi spravne obsluzit JSON-RPC notifications: request bez `id`, napriklad `notifications/initialized`, nesmie vratit JSON-RPC response s `id: null`.

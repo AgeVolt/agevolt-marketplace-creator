@@ -106,7 +106,7 @@ Pravidla:
 - Ak kvoli kompatibilite existuju stare HTTP endpointy s bodkami, nech zostanu ako HTTP endpointy, ale MCP `tools/list` ma vracat underscore aliasy.
 - Skill ma pomenovavat priamo MCP tooly, ktore ma agent pouzit.
 - Skill nesmie odporucat obchadzanie MCP cez shell, `curl`, `Invoke-RestMethod` alebo HTTP URL fallback.
-- Ak tooly nie su viditelne, pouzivatelsky workflow sa ma zastavit a riesi sa refresh/restart Codexu alebo upgrade/reinstall pluginu.
+- Ak tooly nie su viditelne, pouzivatelsky workflow sa ma zastavit a nesmie prejst na HTTP fallback. Najprv over MCP registraciu a OAuth login; pri private AgeVolt MCP pouzi `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom novy chat/refresh/restart Codexu. Upgrade/reinstall ries az po tom.
 
 Pri skille, ktory zavisi na MCP, pridaj do `skills/<skill-id>/agents/openai.yaml`:
 
@@ -128,6 +128,23 @@ plugins/<plugin-id>/.codex-plugin/plugin.json
 ```
 
 `plugin.json` ma obsahovat `mcpServers: "./.mcp.json"` iba ked `.mcp.json` existuje.
+
+## MCP OAuth Onboarding Standard
+
+Pre private AgeVolt MCP nepouzivaj priame Entra metadata ako authorization server. MCP protected resource metadata ma ukazovat na shared broker:
+
+```text
+https://documents.agevolt.com/mcp/auth
+```
+
+Po instalacii pluginu over login:
+
+```text
+codex mcp login <mcp-server-id> --scopes MCP.Access
+codex mcp list
+```
+
+`Auth OAuth` v `codex mcp list` znamena, ze Codex ma ulozene OAuth credentials. Browser moze ukazat len `Authentication complete`, ak pouzivatel uz ma aktivny MS365 SSO session; to je uspesny stav. Po prvom login treba otvorit novy chat alebo refreshnut/restartovat Codex, aby sa MCP tooly nacitali do aktualneho tool surface.
 
 ## MCP Transport Handshake Standard
 

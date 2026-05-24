@@ -136,6 +136,7 @@ Pri zmene skillu, KB, MCP alebo plugin manifestu:
 6. Commitni a pushni Git repo.
 7. Spusti `codex plugin marketplace upgrade <codex-marketplace-id>`.
 8. Over, ze cache obsahuje novu verziu pluginu a novy skill/KB/MCP.
+9. Pri private MCP over `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom `codex mcp list` = `Auth OAuth` a novy chat/refresh Codexu.
 
 Bez version bumpu moze byt tazsie overit, ci sa pouzivatelovi naozaj refreshol plugin cache.
 
@@ -173,4 +174,5 @@ Po pushi:
 - `codex plugin marketplace upgrade <codex-marketplace-id>`
 - skontroluj `~/.codex/config.toml` `last_revision`,
 - skontroluj cache `~/.codex/plugins/cache/<codex-marketplace-id>/<plugin-id>/<version>/`,
-- pri MCP over, ze `.mcp.json` je v cache a plugin manifest ma `mcpServers`.
+- pri MCP over, ze `.mcp.json` je v cache a plugin manifest ma `mcpServers`,
+- pri private MCP over, ze `codex mcp list` ukazuje `Auth OAuth`; `Authentication complete` v browseri bez zadania hesla znamena uspesny MS365 SSO callback.

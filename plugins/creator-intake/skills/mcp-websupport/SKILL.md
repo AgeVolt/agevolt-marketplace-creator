@@ -146,4 +146,21 @@ tools/list -> tool names bez bodiek
 tools/call -> jeden read-only tool vrati realne data alebo korektnu domenu chybu
 ```
 
-Ak MCP nie je v novom chate vystaveny, najprv over server handshake. Az potom ries reinstall, upgrade alebo restart Codexu.
+## Codex OAuth Onboarding
+
+Pri private MCP po deployi otestuj aj Codex OAuth login:
+
+```text
+codex mcp login <mcp-server-id> --scopes MCP.Access
+codex mcp list
+```
+
+`codex mcp list` ma ukazat MCP server ako `Auth OAuth`. Browser nemusi pytat heslo, ak je pouzivatel uz prihlaseny do MS365; stranka `Authentication complete` znamena uspesny callback a ulozenie prihlasenia v Codexe.
+
+Ak MCP nie je v novom chate vystaveny, postupuj v tomto poradi:
+
+1. Over server handshake a `.mcp.json`.
+2. Over, ze MCP server je v `codex mcp list`.
+3. Pri private MCP spusti `codex mcp login <mcp-server-id> --scopes MCP.Access`.
+4. Po `Auth OAuth` otvor novy chat alebo restartuj/refreshni Codex.
+5. Az potom ries reinstall alebo marketplace upgrade.
