@@ -1,37 +1,37 @@
-# Artifact Proposal
+# Navrh Artefaktu
 
 Pouzi tento tvar pri nejasnej alebo novej poziadavke.
 
 ```text
-Recommended artifact:
-Why this:
-Why not alternatives:
-Audience and access:
-Minimal MVP:
+Odporucany artefakt:
+Preco toto:
+Preco nie alternativy:
+Publikum a pristup:
+Minimalne MVP:
 Test:
-Required approval before writing:
+Potrebne schvalenie pred zapisom:
 ```
 
 Pri novom alebo upravovanom skille dopln aj:
 
 ```text
-Existing skills checked:
-Closest existing skill:
-Why not update existing:
-Unique trigger:
-Unique scope:
-Unique rules:
-Merge/split recommendation:
+Skontrolovane existujuce skilly:
+Najblizsi existujuci skill:
+Preco neupravit existujuci:
+Jedinecny trigger:
+Jedinecny scope:
+Jedinecne pravidla:
+Odporucanie merge/split:
 ```
 
 Pri MCP dopln aj:
 
 ```text
 MCP server id:
-MCP public URL:
-Auth model:
-First read-only tool:
-Write safety model:
-No-fallback rule:
-Install/login/new-chat test:
+MCP verejna URL:
+Autentifikacny model:
+Prvy read-only tool:
+Bezpecnostny model zapisu:
+No-fallback pravidlo:
+Instalacia/login/novy chat test:
 ```

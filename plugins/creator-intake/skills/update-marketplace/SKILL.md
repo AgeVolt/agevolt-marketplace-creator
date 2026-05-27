@@ -56,6 +56,21 @@ Najprv urci:
 
 Ak marketplace nesedi, nepresuvaj obsah nasilu. Pouzi `marketplace-catalog.md` a navrhni spravny marketplace alebo novy marketplace proposal.
 
+## Povinne Poradie A Jazyk
+
+Kazdy update existujuceho marketplace rob v tomto poradi:
+
+1. Uprav alebo vytvor SharePoint source v `AI Agent/marketplaces/<marketplace-id>/...`.
+2. Rozdel obsah na interny/private a public-safe.
+3. Do Git repozitara synchronizuj iba public-safe cast.
+4. Bumpni verziu, validuj manifesty/skilly a az potom ries commit/push/upgrade.
+
+Git repo je distribucny/update kanal pre Codex, nie interny zdroj pravdy. Ak vznikne iba Git zmena bez SharePoint source, update je nekompletny.
+
+Vsetky nove alebo upravovane `.md` subory pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
+
+Internu KB, raw exporty, zakaznicke data, produkcne dumpy, SQL exporty, slow logy, zmluvy a citlive podklady nedavaj do public Gitu. Ak public-safe skill potrebuje internu KB, musi ju hladat v lokalnom `AI Agent` roote a pri absencii nahlasit access gap.
+
 ## SharePoint Struktura
 
 Marketplace root musi ostat minimalny:

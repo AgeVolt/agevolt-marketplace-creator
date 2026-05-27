@@ -46,6 +46,20 @@ Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 
 Ak ani tie nie su dostupne, pouzi pravidla v tomto SKILL.md a povedz, ze interny SharePoint root sa nenasiel.
 
+## Povinne Poradie A Jazyk
+
+Kazdu firemnu marketplace zmenu rob najprv v SharePoint source:
+
+```text
+AI Agent/marketplaces/<marketplace-id>/
+```
+
+Az potom priprav public-safe Git repo alebo Git mirror. Git nesmie byt jedine miesto, kde vznikne marketplace README, KB, skill alebo MCP dokumentacia.
+
+Vsetky nove alebo upravovane `.md` subory pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
+
+Do public Gitu nedavaj internu KB, raw exporty, zakaznicke data, produkcne dumpy ani citlive podklady. Public Git obsahuje iba manifesty, public-safe README, public-safe skill workflowy, public-safe KB a instalacne/testovacie pokyny.
+
 ## Rozhodnutie
 
 Novy marketplace vytvor iba ked sa meni cielova skupina, citlivost, public/private hranica, instalacny kanal alebo update kanal.

@@ -1,41 +1,41 @@
-# Smoke Test
+# Rychly Test
 
-## Install
+## Instalacia
 
 ```powershell
 codex plugin marketplace add AgeVolt/agevolt-creator-marketplace
 codex plugin add creator-intake@creator
 ```
 
-Expected:
+Ocakavanie:
 
-- marketplace appears as `creator`
-- plugin appears as `creator-intake`
-- skill appears as `creator-intake`
+- marketplace sa zobrazi ako `creator`
+- plugin sa zobrazi ako `creator-intake`
+- skill sa zobrazi ako `creator-intake`
 
-## Behavior Prompt
+## Test Spravania
 
 ```text
 Pouzi Creator Intake a sprav mi skill na triedenie mailov.
 ```
 
-Expected:
+Ocakavanie:
 
-- no direct company-wide skill is created
-- response first asks for audience/examples/write risk or returns an artifact proposal
-- if local SharePoint `AI Agent` exists, the skill reads internal creator rules
+- nevytvori sa priamo firemny skill pre vsetkych
+- odpoved si najprv vypyta publikum/priklady/riziko zapisu alebo vrati navrh artefaktu
+- ak lokalny SharePoint `AI Agent` existuje, skill cita interne Creator pravidla
 
-## Upgrade
+## Aktualizacia
 
-1. bump `plugins/creator-intake/.codex-plugin/plugin.json` version
-2. push to `main`
-3. run:
+1. bumpni verziu v `plugins/creator-intake/.codex-plugin/plugin.json`
+2. push do `main`
+3. spusti:
 
 ```powershell
 codex plugin marketplace upgrade creator
 ```
 
-Expected:
+Ocakavanie:
 
-- marketplace snapshot updates
-- plugin cache updates to the new version
+- marketplace snapshot sa aktualizuje
+- plugin cache sa aktualizuje na novu verziu

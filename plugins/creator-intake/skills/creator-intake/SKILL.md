@@ -51,7 +51,19 @@ Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 
 Ak ani tie nie su dostupne, pouzi fallback pravidla nizsie a povedz, ze interny SharePoint root sa nenasiel.
 
-## Fallback Decision Rules
+## Jazyk A Source Of Truth
+
+Pri kazdom navrhu alebo implementacnom odporucani dodrz tieto pravidla:
+
+- vsetky nove alebo upravovane `.md` subory maju byt po slovensky,
+- vynimky su iba technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka na iny jazyk,
+- SharePoint `AI Agent/marketplaces/<marketplace-id>/...` je zdroj pravdy,
+- public Git repo je iba public-safe distribucny/update kanal pre Codex,
+- interna KB, raw exporty, zakaznicke data a produkcne podklady ostavaju mimo public Git.
+
+Ak pouzivatel chce implementovat zmenu v existujucom marketplace, odkaz na `update-marketplace` musi zahrnat SharePoint source-first postup. Ak ide o novy marketplace, odkaz na `create-marketplace` musi zahrnat minimalnu SharePoint strukturu pred Gitom.
+
+## Nahradne Rozhodovacie Pravidla
 
 - Marketplace: vytvor iba ked ide o inu cielovu skupinu, viditelnost, citlivost alebo update kanal.
 - Plugin: vytvor ked ide o instalovatelny pracovny blok, ktory dava zmysel zapnut samostatne.
@@ -94,18 +106,18 @@ Ak chyba kontext, pytaj sa najviac tri otazky naraz:
 2. Ake su 2-3 realne poziadavky, ktore ma agent zvladnut?
 3. Ma agent iba navrhovat, alebo aj citat/zapisovat do systemov?
 
-## Artifact Proposal Format
+## Format Navrhu Artefaktu
 
 Vystup pri nejasnej alebo novej poziadavke:
 
 ```text
-Recommended artifact:
-Why this:
-Why not alternatives:
-Audience and access:
-Minimal MVP:
+Odporucany artefakt:
+Preco toto:
+Preco nie alternativy:
+Publikum a pristup:
+Minimalne MVP:
 Test:
-Required approval before writing:
+Potrebne schvalenie pred zapisom:
 ```
 
 ## Public Repo Pravidlo

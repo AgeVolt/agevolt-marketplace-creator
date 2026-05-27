@@ -9,6 +9,12 @@ Tento skill je pre AgeVolt MCP servery hostovane ako PHP endpointy na WebSupport
 
 Pred vytvorenim alebo vacsou upravou MCP precitaj aj `../../kb/mcp-build-runbook.md`. Pri private data MCP precitaj aj `references/entra-private-mcp-auth.md`.
 
+## Jazyk A Source Of Truth
+
+Vsetky MCP `.md` subory, ktore vytvoris alebo upravis, pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka na iny jazyk.
+
+MCP dokumentaciu, server_code README a private reference najprv uprav v SharePoint source pod konkretnym marketplace/pluginom. Do public Gitu synchronizuj iba public-safe cast bez secrets, accessov, raw exportov a internych konfiguracii.
+
 ## Bezpecnost
 
 - Nikdy nevkladaj FTP hesla, API tokeny ani ine secrets do public Git repozitara.

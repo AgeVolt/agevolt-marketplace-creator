@@ -1,10 +1,10 @@
-# Git Update Flow
+# Postup Git Aktualizacie
 
 Tento subor definuje, co sa musi zmenit v SharePointe a v Git marketplace, aby si zmenu vedeli ostatni pouzivatelia aktualizovat v Codexe.
 
 ## Zaklad
 
-Codex vie automaticky upgradovat iba Git marketplace. SharePoint lokalny priecinok je interny source of truth, ale samotny Codex upgrade pre beznych pouzivatelov ide cez public Git repo marketplace.
+Codex vie automaticky upgradovat iba Git marketplace. SharePoint lokalny priecinok je interny zdroj pravdy, ale samotny Codex upgrade pre beznych pouzivatelov ide cez public Git repo marketplace.
 
 Preto kazdy public-safe artefakt musi mat:
 
@@ -12,6 +12,12 @@ Preto kazdy public-safe artefakt musi mat:
 2. Git publikovatelny obsah v `https://github.com/AgeVolt/<marketplace-id>`.
 3. Commit a push do Git repozitara.
 4. Overenie cez `codex plugin marketplace upgrade <codex-marketplace-id>`.
+
+Poradie je zavazne: najprv SharePoint source, potom public-safe Git mirror. Ak agent vytvori alebo upravi iba Git bez SharePoint source, zmena je nekompletna.
+
+Vsetky nove alebo upravovane `.md` subory pis po slovensky v SharePointe aj v Gite. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
+
+Git repo nesluzi ako interny zdroj pravdy ani sklad internych podkladov. Do Gitu zapisuj iba public-safe manifesty, public-safe skill workflowy, public-safe KB, tool mapping, instalacne/testovacie pokyny a odkazy na to, ako najst lokalny `AI Agent` root.
 
 ## Pri Novom Marketplace
 

@@ -1,6 +1,6 @@
-# Creator Intake Rules
+# Creator Intake Pravidla
 
-## Decision Matrix
+## Rozhodovacia Matica
 
 Vyber najmensi artefakt, ktory realne riesi poziadavku.
 
@@ -17,7 +17,7 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 | Personal rule | Preferencia jedneho cloveka. |
 | Script | Deterministicka opakovatelna operacia. |
 
-## Stop Rules
+## Stop Pravidla
 
 - Nevytvaraj firemny skill len preto, ze pouzivatel povedal "sprav skill".
 - Nevytvaraj novy skill, ak existujuci skill v rovnakom plugine ma podobny trigger, scope a pravidla; najprv navrhni update alebo zlucenie.
@@ -27,7 +27,16 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 - Pri MCP write akcii vyzaduj read/preview a explicitne potvrdenie.
 - Pri MCP nikdy nenavrhuj bezny user workflow cez priamy HTTP fallback namiesto MCP tool callu.
 
-## Skill Uniqueness Rules
+## Jazyk A Source Of Truth
+
+- Vsetky nove alebo upravovane `.md` subory v AgeVolt AI Agent, marketplaces, pluginoch, skilloch, KB, MCP dokumentacii a public Git mirroroch pis po slovensky.
+- Vynimky su iba technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
+- Pri firemnej implementacnej zmene najprv uprav SharePoint source v `AI Agent/marketplaces/<marketplace-id>/...`.
+- Public Git repo je public-safe distribucny/update kanal pre Codex, nie interny zdroj pravdy.
+- Internu KB, raw exporty, zakaznicke data, produkcne dumpy a citlive podklady nechaj v SharePointe alebo inom schvalenom private ulozisku.
+- Ak public Git skill potrebuje internu KB, musi vediet najst lokalny `AI Agent` root a pri jeho absencii jasne povedat, ze interna KB nie je dostupna. Nesmie si ju vymysliet ani ju duplikovat do Gitu.
+
+## Pravidla Jedinecnosti Skillov
 
 Kazdy skill v plugine musi mat jasny vlastny dovod existencie.
 
@@ -47,7 +56,7 @@ Kontrolna veta pred vytvorenim skillu:
 Precital som ostatne skilly v plugine a tento skill ma iny trigger/scope/rules ako: ...
 ```
 
-## MCP Tool Rules
+## MCP Tool Pravidla
 
 MCP pre Codex musi byt navrhnuty ako priamo volatelny tool surface.
 
@@ -62,7 +71,7 @@ MCP pre Codex musi byt navrhnuty ako priamo volatelny tool surface.
 - HTTP/streamable HTTP MCP server musi spravne obsluzit JSON-RPC notifications: request bez `id`, napriklad `notifications/initialized`, nesmie vratit JSON-RPC response s `id: null`.
 - Pred odovzdanim MCP over minimalne `initialize`, `notifications/initialized`, `tools/list`, jeden realny read-only `tools/call`, `codex mcp login`, `Auth OAuth` a novy chat alebo `codex exec` bez shell fallbacku.
 
-## Required Output Pri Nejasnej Poziadavke
+## Povinne Vystupy Pri Nejasnej Poziadavke
 
 Vrat artifact proposal alebo sa opytaj tri intake otazky.
 

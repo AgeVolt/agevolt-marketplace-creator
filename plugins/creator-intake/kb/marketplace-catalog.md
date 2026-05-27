@@ -1,4 +1,4 @@
-# AgeVolt Marketplace Catalog
+# AgeVolt Marketplace Katalog
 
 Toto je aktualny katalog AgeVolt Codex marketplaces. Cisty agent ma tento subor precitat pred vytvorenim alebo upravou marketplace, pluginu, skillu, KB alebo MCP.
 

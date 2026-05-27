@@ -1,6 +1,8 @@
-# MCP Build Runbook
+# MCP Build Postup
 
 Tento runbook pouzi pri kazdom novom alebo upravovanom AgeVolt MCP. Ciel je, aby dalsi MCP fungoval v Codexe priamo ako tool surface, bez shell fallbackov a bez rucneho citania tokenov.
+
+Vsetky nove alebo upravovane MCP `.md` subory pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka na iny jazyk. Najprv uprav SharePoint source pri konkretnom marketplace/pluginu a do public Gitu posielaj iba public-safe cast.
 
 ## Referencny Vzor
 

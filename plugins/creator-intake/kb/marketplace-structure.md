@@ -1,4 +1,4 @@
-# AgeVolt Marketplace Structure
+# AgeVolt Marketplace Struktura
 
 Toto je aktualny standard pre AgeVolt AI Agent marketplaces.
 
@@ -94,6 +94,19 @@ Subory `assets/icon.png` a `assets/logo.png` drzte pri danom skille, aby cesty f
 - Skill vysvetluje workflow a bezpecne pouzitie.
 - MCP poskytuje nastroje, resources alebo prompts.
 - KB drzi znalosti, ktore by zbytocne zatazovali `SKILL.md`.
+
+## Pravidlo Jazyka A Uloziska
+
+Vsetky `.md` subory vytvarane alebo upravovane v AgeVolt marketplaces pis po slovensky. Anglictina je povolena iba pre technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitne vyziadany iny jazyk.
+
+SharePoint `AI Agent/marketplaces/<marketplace-id>/...` je zdroj pravdy pre marketplace, pluginy, skilly, KB a MCP dokumentaciu. Public Git repo je mirror len pre public-safe distribuciu do Codexu. Pri kazdej zmene dodrz poradie:
+
+1. uprav alebo vytvor SharePoint source,
+2. oddel interny/private obsah od public-safe obsahu,
+3. zosynchronizuj iba public-safe cast do Git repo,
+4. bumpni verziu, validuj a az potom publikuj update.
+
+Ak sa znalost pouziva vo viacerych skilloch v jednom plugine, patri na plugin-level KB. Ak sa pouziva vo viacerych pluginoch jedneho marketplace, patri na marketplace-level alebo spolocnu marketplace KB iba po explicitnom schvaleni struktury. Internu KB neduplikuj do Gitu; public Git skill ma odkazovat na lokalny `AI Agent` root alebo nahlasit access gap.
 
 ## Skill Boundary Standard
 
