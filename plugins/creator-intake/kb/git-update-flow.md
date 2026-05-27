@@ -4,21 +4,33 @@ Tento subor definuje, co sa musi zmenit v SharePointe a v Git marketplace, aby s
 
 ## Zaklad
 
-Codex vie automaticky upgradovat iba Git marketplace. SharePoint lokalny priecinok je interny zdroj pravdy, ale samotny Codex upgrade pre beznych pouzivatelov ide cez public Git repo marketplace.
+Codex vie automaticky upgradovat iba Git marketplace. SharePoint lokalny priecinok je interny zdroj pravdy, ale samotny Codex upgrade pre beznych pouzivatelov ide cez verejny Git repo marketplace.
 
-Preto kazdy public-safe artefakt musi mat:
+Preto kazdy verejne bezpecny artefakt musi mat:
 
-1. SharePoint source v `AI Agent/marketplaces/<marketplace-id>/`.
+1. SharePoint zdroj v `AI Agent/marketplaces/<marketplace-id>/`.
 2. Git publikovatelny obsah v `https://github.com/AgeVolt/<marketplace-id>`.
-3. Validovany Git working tree alebo lokalny commit pripraveny na review.
+3. Validovany Git working tree alebo lokalny commit pripraveny na kontrolu.
 4. `git push` az po explicitnom potvrdeni pouzivatela v aktualnom chate.
 5. Overenie cez `codex plugin marketplace upgrade <codex-marketplace-id>` po schvalenom pushi.
 
-Poradie je zavazne: najprv SharePoint source, potom public-safe Git mirror. Ak agent vytvori alebo upravi iba Git bez SharePoint source, zmena je nekompletna.
+Poradie je zavazne: najprv SharePoint zdroj, potom verejne bezpecna Git kopia. Ak agent vytvori alebo upravi iba Git bez SharePoint zdroja, zmena je nekompletna.
 
 Vsetky nove alebo upravovane `.md` subory pis po slovensky v SharePointe aj v Gite. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
 
-Git repo nesluzi ako interny zdroj pravdy ani sklad internych podkladov. Do Gitu zapisuj iba public-safe manifesty, public-safe skill workflowy, public-safe KB, tool mapping, instalacne/testovacie pokyny a odkazy na to, ako najst lokalny `AI Agent` root.
+Git repo nesluzi ako interny zdroj pravdy ani sklad internych podkladov. Do Gitu zapisuj iba verejne bezpecne manifesty, verejne bezpecne skillove postupy, verejne bezpecnu KB, mapovanie toolov, instalacne/testovacie pokyny a odkazy na to, ako najst lokalny `AI Agent` root.
+
+## Povinna SharePoint/Git Kontrola
+
+Pri kazdej implementacnej zmene v existujucom marketplace kontroluj obidve vrstvy:
+
+1. Najdi SharePoint zdroj v `AI Agent/marketplaces/<marketplace-id>/...`.
+2. Najdi realny Git checkout, ktory pouzivatel kontroluje. Ak pouzivatel uviedol konkretnu cestu, pracuj v nej.
+3. Pred editom precitaj relevantne README, manifesty, `SKILL.md`, `agents/openai.yaml` a KB v SharePointe aj v Gite.
+4. Po edite over, ze verejne bezpecne casti su zosuladene v oboch miestach.
+5. Over, ze sukromna KB alebo raw exporty ostali iba v SharePointe a Git ma iba access-gap pravidlo alebo verejne bezpecny suhrn.
+6. Over jazyk: nove alebo upravene `.md` texty maju byt po slovensky okrem technickych identifikatorov a povolenych vynimiek.
+7. Over referencie: kazdy skill musi odkazovat iba na existujuce KB/assets/MCP subory alebo musi vysvetlit, ze ide o sukromny access gap.
 
 ## Push Approval Gate
 
@@ -31,7 +43,7 @@ Za potvrdenie sa pocita iba jasna veta v aktualnom chate, napriklad:
 - "mozes to publikovat",
 - "pushni tento commit".
 
-Za potvrdenie sa nepocita vseobecne zadanie "oprav to", "implementuj plan", "sprav update", "dokonci to" ani to, ze GitHub remote funguje. Bez potvrdenia priprav diff alebo lokalny commit na review a v zavere napis, ze push caka na schvalenie.
+Za potvrdenie sa nepocita vseobecne zadanie "oprav to", "implementuj plan", "sprav update", "dokonci to" ani to, ze GitHub remote funguje. Bez potvrdenia priprav diff alebo lokalny commit na kontrolu a v zavere napis, ze push caka na schvalenie.
 
 ## Pri Novom Marketplace
 
@@ -102,7 +114,7 @@ Pravidla:
 - Pri MCP si precitaj `creator-intake/kb/mcp-build-runbook.md` a pouzi ho ako checklist.
 - Nevytvaraj prazdne `templates/`, `tests/`, `assets/`, `scripts/` ani `mcp/`.
 
-V Git repozitari `<marketplace-id>` pridaj public-safe plugin:
+V Git repozitari `<marketplace-id>` pridaj verejne bezpecny plugin:
 
 ```text
 plugins/<plugin-id>/
@@ -160,37 +172,42 @@ Pred vytvorenim alebo upravou `SKILL.md` v existujucom plugine:
 
 Pri zmene skillu, KB, MCP alebo plugin manifestu:
 
-1. Uprav SharePoint source.
-2. Uprav Git repo public-safe obsah.
-3. Bumpni `plugins/<plugin-id>/.codex-plugin/plugin.json` `version` semverom.
-4. Ak pribudol MCP server, pridaj `mcpServers` do `plugin.json` a `.mcp.json` do plugin rootu.
-5. Ak MCP server zmizol, odstran `mcpServers` aj `.mcp.json`.
-6. Priprav lokalny commit alebo diff na review.
-7. Zastav a vypytaj si explicitne potvrdenie pred `git push`.
-8. Po schvalenom pushi spusti `codex plugin marketplace upgrade <codex-marketplace-id>`.
-9. Over, ze cache obsahuje novu verziu pluginu a novy skill/KB/MCP.
-10. Pri private MCP over `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom `codex mcp list` = `Auth OAuth` a novy chat/refresh Codexu.
+1. Najdi a precitaj SharePoint zdroj aj realny Git checkout.
+2. Uprav SharePoint zdroj.
+3. Rozdel obsah na sukromny a verejne bezpecny.
+4. Uprav Git repo verejne bezpecny obsah v tom istom update.
+5. Skontroluj, ze jazyk upravenych `.md` suborov je slovensky.
+6. Skontroluj, ze `SKILL.md`, `agents/openai.yaml`, KB a manifesty na seba odkazuju bez chybajucich suborov.
+7. Bumpni `plugins/<plugin-id>/.codex-plugin/plugin.json` `version` semverom.
+8. Ak pribudol MCP server, pridaj `mcpServers` do `plugin.json` a `.mcp.json` do plugin rootu.
+9. Ak MCP server zmizol, odstran `mcpServers` aj `.mcp.json`.
+10. Validuj skill, plugin a JSON/YAML manifesty.
+11. Priprav lokalny commit alebo diff na kontrolu.
+12. Zastav a vypytaj si explicitne potvrdenie pred `git push`.
+13. Po schvalenom pushi spusti `codex plugin marketplace upgrade <codex-marketplace-id>`.
+14. Over, ze cache obsahuje novu verziu pluginu a novy skill/KB/MCP.
+15. Pri sukromnom MCP over `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom `codex mcp list` = `Auth OAuth` a novy chat/refresh Codexu.
 
 Bez version bumpu moze byt tazsie overit, ci sa pouzivatelovi naozaj refreshol plugin cache.
 
-## Public Safe Hranica
+## Verejne Bezpecna Hranica
 
-Do public Git repozitara patri:
+Do verejneho Git repozitara patri:
 
 - plugin manifest,
-- public-safe skill instrukcie,
-- public-safe KB a tool mapping,
+- verejne bezpecne skill instrukcie,
+- verejne bezpecna KB a mapovanie toolov,
 - `.mcp.json` s URL bez secretov,
 - README bez internych dat.
 
-Do public Git repozitara nepatri:
+Do verejneho Git repozitara nepatri:
 
-- customer data,
+- zakaznicke data,
 - realne doklady,
 - tokeny, API kluce, FTP pristupy,
 - `config.local.php`,
 - exporty zo SharePointu, ClickUpu, Teams, mailov alebo SuperFaktury,
-- interne KB, ktore nie su schvalene ako public-safe.
+- interne KB, ktore nie su schvalene ako verejne bezpecne.
 
 Ak je KB interna iba pre SharePoint, skill v Gite musi vediet najst lokalny `AI Agent` root a precitat ju odtial. Ak root nenajde, musi povedat, ze interna KB nie je dostupna.
 
@@ -201,6 +218,9 @@ Pred ziadostou o schvalenie pushu:
 - `python <skill-creator>/scripts/quick_validate.py <skill-dir>`
 - `python <plugin-creator>/scripts/validate_plugin.py <plugin-dir>`
 - JSON parse `.agents/plugins/marketplace.json`, `.codex-plugin/plugin.json`, `.mcp.json`.
+- porovnanie upravenych verejne bezpecnych suborov medzi SharePoint zdrojom a Git checkoutom,
+- kontrola chybajucich KB/assets/MCP referencii zo `SKILL.md`, `agents/openai.yaml` a manifestov,
+- kontrola jazyka v upravenych `.md` suboroch.
 
 Po schvalenom pushi:
 
@@ -208,5 +228,5 @@ Po schvalenom pushi:
 - skontroluj `~/.codex/config.toml` `last_revision`,
 - skontroluj cache `~/.codex/plugins/cache/<codex-marketplace-id>/<plugin-id>/<version>/`,
 - pri MCP over, ze `.mcp.json` je v cache a plugin manifest ma `mcpServers`,
-- pri private MCP over, ze `codex mcp list` ukazuje `Auth OAuth`; `Authentication complete` v browseri bez zadania hesla znamena uspesny MS365 SSO callback,
-- private MCP E2E over cez novy chat alebo `codex exec`; nikdy nie citanim `.codex/.credentials.json` a rucnym bearer tokenom.
+- pri sukromnom MCP over, ze `codex mcp list` ukazuje `Auth OAuth`; `Authentication complete` v browseri bez zadania hesla znamena uspesny MS365 SSO callback,
+- sukromne MCP E2E over cez novy chat alebo `codex exec`; nikdy nie citanim `.codex/.credentials.json` a rucnym bearer tokenom.
