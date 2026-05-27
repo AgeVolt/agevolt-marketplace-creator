@@ -59,6 +59,8 @@ Vsetky `.md` subory v tomto marketplace a jeho public Git kopii pis po slovensky
 
 Tento SharePoint priecinok je interny zdroj pravdy. Public Git repo je iba distribucny/update kanal pre Codex a nesmie obsahovat internu KB.
 
+`git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy je povoleny iba po explicitnom potvrdeni pouzivatela v aktualnom chate. Bez potvrdenia priprav iba SharePoint source, public-safe Git zmeny, validacie, diff alebo lokalny commit na review.
+
 Repo moze obsahovat:
 
 - plugin manifesty,

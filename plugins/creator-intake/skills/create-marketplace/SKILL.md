@@ -60,6 +60,8 @@ Vsetky nove alebo upravovane `.md` subory pis po slovensky. Vynimky su technicke
 
 Do public Gitu nedavaj internu KB, raw exporty, zakaznicke data, produkcne dumpy ani citlive podklady. Public Git obsahuje iba manifesty, public-safe README, public-safe skill workflowy, public-safe KB a instalacne/testovacie pokyny.
 
+`git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy nerob bez explicitneho potvrdenia pouzivatela v aktualnom chate. Ak potvrdenie chyba, priprav iba SharePoint source, Git zmeny, validacie, diff alebo lokalny commit na review a zastav sa pred pushom.
+
 ## Rozhodnutie
 
 Novy marketplace vytvor iba ked sa meni cielova skupina, citlivost, public/private hranica, instalacny kanal alebo update kanal.
@@ -112,7 +114,7 @@ README.md
 5. Aktualizuj `AI Agent/README.md` a `creator-intake/kb/marketplace-catalog.md`.
 6. Nepridavaj realny plugin, skill, KB ani MCP do prazdneho marketplace bez samostatneho schvalenia.
 7. Pri firemnej zmene zapis `revision-history.md`, ak existuje.
-8. Po Git pushi over `codex plugin marketplace upgrade <codex-marketplace-id>`.
+8. Po explicitne schvalenom Git pushi over `codex plugin marketplace upgrade <codex-marketplace-id>`.
 
 ## Test
 

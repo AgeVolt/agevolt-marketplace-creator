@@ -10,14 +10,28 @@ Preto kazdy public-safe artefakt musi mat:
 
 1. SharePoint source v `AI Agent/marketplaces/<marketplace-id>/`.
 2. Git publikovatelny obsah v `https://github.com/AgeVolt/<marketplace-id>`.
-3. Commit a push do Git repozitara.
-4. Overenie cez `codex plugin marketplace upgrade <codex-marketplace-id>`.
+3. Validovany Git working tree alebo lokalny commit pripraveny na review.
+4. `git push` az po explicitnom potvrdeni pouzivatela v aktualnom chate.
+5. Overenie cez `codex plugin marketplace upgrade <codex-marketplace-id>` po schvalenom pushi.
 
 Poradie je zavazne: najprv SharePoint source, potom public-safe Git mirror. Ak agent vytvori alebo upravi iba Git bez SharePoint source, zmena je nekompletna.
 
 Vsetky nove alebo upravovane `.md` subory pis po slovensky v SharePointe aj v Gite. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
 
 Git repo nesluzi ako interny zdroj pravdy ani sklad internych podkladov. Do Gitu zapisuj iba public-safe manifesty, public-safe skill workflowy, public-safe KB, tool mapping, instalacne/testovacie pokyny a odkazy na to, ako najst lokalny `AI Agent` root.
+
+## Push Approval Gate
+
+`git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy nikdy nerob automaticky. Pred pushom zastav a vypytaj si explicitne potvrdenie pouzivatela pre konkretnu zmenu a konkretny repo/branch.
+
+Za potvrdenie sa pocita iba jasna veta v aktualnom chate, napriklad:
+
+- "pushni to do main",
+- "potvrdzujem push",
+- "mozes to publikovat",
+- "pushni tento commit".
+
+Za potvrdenie sa nepocita vseobecne zadanie "oprav to", "implementuj plan", "sprav update", "dokonci to" ani to, ze GitHub remote funguje. Bez potvrdenia priprav diff alebo lokalny commit na review a v zavere napis, ze push caka na schvalenie.
 
 ## Pri Novom Marketplace
 
@@ -151,10 +165,11 @@ Pri zmene skillu, KB, MCP alebo plugin manifestu:
 3. Bumpni `plugins/<plugin-id>/.codex-plugin/plugin.json` `version` semverom.
 4. Ak pribudol MCP server, pridaj `mcpServers` do `plugin.json` a `.mcp.json` do plugin rootu.
 5. Ak MCP server zmizol, odstran `mcpServers` aj `.mcp.json`.
-6. Commitni a pushni Git repo.
-7. Spusti `codex plugin marketplace upgrade <codex-marketplace-id>`.
-8. Over, ze cache obsahuje novu verziu pluginu a novy skill/KB/MCP.
-9. Pri private MCP over `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom `codex mcp list` = `Auth OAuth` a novy chat/refresh Codexu.
+6. Priprav lokalny commit alebo diff na review.
+7. Zastav a vypytaj si explicitne potvrdenie pred `git push`.
+8. Po schvalenom pushi spusti `codex plugin marketplace upgrade <codex-marketplace-id>`.
+9. Over, ze cache obsahuje novu verziu pluginu a novy skill/KB/MCP.
+10. Pri private MCP over `codex mcp login <mcp-server-id> --scopes MCP.Access`, potom `codex mcp list` = `Auth OAuth` a novy chat/refresh Codexu.
 
 Bez version bumpu moze byt tazsie overit, ci sa pouzivatelovi naozaj refreshol plugin cache.
 
@@ -181,13 +196,13 @@ Ak je KB interna iba pre SharePoint, skill v Gite musi vediet najst lokalny `AI 
 
 ## Minimalne Overenie
 
-Pred pushom:
+Pred ziadostou o schvalenie pushu:
 
 - `python <skill-creator>/scripts/quick_validate.py <skill-dir>`
 - `python <plugin-creator>/scripts/validate_plugin.py <plugin-dir>`
 - JSON parse `.agents/plugins/marketplace.json`, `.codex-plugin/plugin.json`, `.mcp.json`.
 
-Po pushi:
+Po schvalenom pushi:
 
 - `codex plugin marketplace upgrade <codex-marketplace-id>`
 - skontroluj `~/.codex/config.toml` `last_revision`,

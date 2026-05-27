@@ -60,8 +60,11 @@ Pri kazdom navrhu alebo implementacnom odporucani dodrz tieto pravidla:
 - SharePoint `AI Agent/marketplaces/<marketplace-id>/...` je zdroj pravdy,
 - public Git repo je iba public-safe distribucny/update kanal pre Codex,
 - interna KB, raw exporty, zakaznicke data a produkcne podklady ostavaju mimo public Git.
+- `git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy je povoleny iba po explicitnom potvrdeni pouzivatela v aktualnom chate.
 
 Ak pouzivatel chce implementovat zmenu v existujucom marketplace, odkaz na `update-marketplace` musi zahrnat SharePoint source-first postup. Ak ide o novy marketplace, odkaz na `create-marketplace` musi zahrnat minimalnu SharePoint strukturu pred Gitom.
+
+Vseobecne schvalenie implementacie nie je schvalenie pushu. Ak ma byt zmena publikovana, najprv priprav diff alebo lokalny commit, ukaz vysledok a poziadaj o samostatne potvrdenie pushu.
 
 ## Nahradne Rozhodovacie Pravidla
 

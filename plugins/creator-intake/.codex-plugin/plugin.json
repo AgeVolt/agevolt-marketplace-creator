@@ -1,6 +1,6 @@
 {
   "name": "creator-intake",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "Public-safe intake plugin pre rozhodovanie, ci AgeVolt AI poziadavka patri do marketplace, pluginu, skillu, KB, MCP, pravidla, scriptu alebo bez migracie.",
   "author": {
     "name": "AgeVolt",
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "Creator Intake",
     "shortDescription": "Rozhoduje typ AgeVolt AI artefaktu.",
-    "longDescription": "Creator Intake je public-safe vstupna brana pre AgeVolt Creator. Pri poziadavkach na nove marketplaces, pluginy, skills, KB, MCP, pravidla alebo migraciu najprv rozhodne spravny typ artefaktu, najde lokalny SharePoint AI Agent root v minimalnej marketplaces strukture a pripravi artifact proposal namiesto nahodnej implementacie. Pri implementacii vyzaduje SharePoint source ako prvy zapis, public-safe Git az ako distribucny mirror a vsetky nove alebo upravovane .md subory po slovensky. Pri MCP vyzaduje Codex kompatibilne nazvy toolov, spravny MCP handshake, server_code pri konkretnom plugine a zakazuje priame HTTP fallbacky v user workflowoch.",
+    "longDescription": "Creator Intake je public-safe vstupna brana pre AgeVolt Creator. Pri poziadavkach na nove marketplaces, pluginy, skills, KB, MCP, pravidla alebo migraciu najprv rozhodne spravny typ artefaktu, najde lokalny SharePoint AI Agent root v minimalnej marketplaces strukture a pripravi artifact proposal namiesto nahodnej implementacie. Pri implementacii vyzaduje SharePoint source ako prvy zapis, public-safe Git az ako distribucny mirror a vsetky nove alebo upravovane .md subory po slovensky. Git push do main/master/release alebo zdielanej vetvy je povoleny iba po explicitnom potvrdeni pouzivatela v aktualnom chate. Pri MCP vyzaduje Codex kompatibilne nazvy toolov, spravny MCP handshake, server_code pri konkretnom plugine a zakazuje priame HTTP fallbacky v user workflowoch.",
     "developerName": "AgeVolt",
     "category": "Productivity",
     "capabilities": [

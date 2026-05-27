@@ -15,6 +15,8 @@ Vsetky MCP `.md` subory, ktore vytvoris alebo upravis, pis po slovensky. Vynimky
 
 MCP dokumentaciu, server_code README a private reference najprv uprav v SharePoint source pod konkretnym marketplace/pluginom. Do public Gitu synchronizuj iba public-safe cast bez secrets, accessov, raw exportov a internych konfiguracii.
 
+`git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy rob iba po explicitnom potvrdeni pouzivatela v aktualnom chate. Bez potvrdenia priprav len SharePoint source, Git zmeny, validacie, diff alebo lokalny commit na review.
+
 ## Bezpecnost
 
 - Nikdy nevkladaj FTP hesla, API tokeny ani ine secrets do public Git repozitara.
@@ -135,7 +137,7 @@ Read-only tool moze bezat priamo.
 6. Pridaj `.mcp.json` do plugin rootu a `mcpServers: "./.mcp.json"` do `.codex-plugin/plugin.json`.
 7. Skill, ktory MCP pouziva, musi hovorit o priamych MCP tooloch a nesmie odporucat HTTP fallbacky, citanie `.codex/.credentials.json` ani rucne bearer tokeny.
 8. Ak MCP pristupuje k private datam, pouzi shared AgeVolt OAuth Broker `https://documents.agevolt.com/mcp/auth` a nastav MCP audience na jeho public MCP URL.
-9. Pri zmene public pluginu bumpni verziu a pushni Git marketplace.
+9. Pri zmene public pluginu bumpni verziu a priprav Git marketplace; pushni az po explicitnom potvrdeni pouzivatela.
 10. Pri zmene private server_code zapis zmenu do SharePoint revision history.
 
 ## Deploy Workflow

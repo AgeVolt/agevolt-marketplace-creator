@@ -26,6 +26,7 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 - Nedavaj internu KB, customer data, secrets ani systemove exporty do public Git.
 - Pri MCP write akcii vyzaduj read/preview a explicitne potvrdenie.
 - Pri MCP nikdy nenavrhuj bezny user workflow cez priamy HTTP fallback namiesto MCP tool callu.
+- Nikdy nerob `git push` do `main`, `master`, release branchu ani inej zdielanej vetvy bez explicitneho potvrdenia pouzivatela v aktualnom chate.
 
 ## Jazyk A Source Of Truth
 
@@ -35,6 +36,8 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 - Public Git repo je public-safe distribucny/update kanal pre Codex, nie interny zdroj pravdy.
 - Internu KB, raw exporty, zakaznicke data, produkcne dumpy a citlive podklady nechaj v SharePointe alebo inom schvalenom private ulozisku.
 - Ak public Git skill potrebuje internu KB, musi vediet najst lokalny `AI Agent` root a pri jeho absencii jasne povedat, ze interna KB nie je dostupna. Nesmie si ju vymysliet ani ju duplikovat do Gitu.
+- Bez potvrdenia pushu moze agent pripravit SharePoint source, Git working tree, validacie, diff alebo lokalny commit na review, ale musi zastavit pred `git push`.
+- Vseobecne zadanie typu "oprav to", "implementuj plan" alebo "sprav update" nie je suhlas s pushom do `main`.
 
 ## Pravidla Jedinecnosti Skillov
 

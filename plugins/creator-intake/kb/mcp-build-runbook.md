@@ -4,6 +4,8 @@ Tento runbook pouzi pri kazdom novom alebo upravovanom AgeVolt MCP. Ciel je, aby
 
 Vsetky nove alebo upravovane MCP `.md` subory pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka na iny jazyk. Najprv uprav SharePoint source pri konkretnom marketplace/pluginu a do public Gitu posielaj iba public-safe cast.
 
+`git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy nikdy nerob bez explicitneho potvrdenia pouzivatela v aktualnom chate. Bez potvrdenia priprav iba diff alebo lokalny commit na review.
+
 ## Referencny Vzor
 
 Najprv si pozri existujuci SuperFaktura MCP, lebo je aktualny overeny vzor:
@@ -292,7 +294,7 @@ Pri private produkcnom MCP nepouzivaj manualne citanie Codex credential tokenov 
 
 ## Codex E2E Testy
 
-Po Git pushi a instalacii pluginu otestuj:
+Po explicitne schvalenom Git pushi a instalacii pluginu otestuj:
 
 1. Marketplace sa da pridat z Git repo.
 2. Plugin sa da nainstalovat.
@@ -352,4 +354,4 @@ MCP je hotovy az ked plati:
 - read-only smoke test prejde priamo cez MCP tool,
 - write tooly maju preview/execute model,
 - SharePoint `revision-history.md` ma zapis zmien,
-- Git repo je bumpnute, commitnute a pushnute.
+- Git repo je bumpnute a commitnute; push prebehol iba po explicitnom potvrdeni pouzivatela.

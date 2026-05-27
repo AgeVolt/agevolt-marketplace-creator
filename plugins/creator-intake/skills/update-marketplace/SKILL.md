@@ -15,7 +15,7 @@ Tento skill je implementacny update existujuceho marketplace:
 - pridanie alebo uprava skillu,
 - pridanie alebo uprava KB,
 - pridanie alebo uprava MCP,
-- manifest update, version bump, Git push a Codex upgrade.
+- manifest update, version bump, priprava Git zmeny a Codex upgrade po schvalenom pushi.
 
 Nepouzivaj ho, ked poziadavka este len rozhoduje, co ma vzniknut; vtedy pouzi `creator-intake`. Nepouzivaj ho na vytvorenie noveho marketplace repo; vtedy pouzi `create-marketplace`.
 
@@ -63,13 +63,16 @@ Kazdy update existujuceho marketplace rob v tomto poradi:
 1. Uprav alebo vytvor SharePoint source v `AI Agent/marketplaces/<marketplace-id>/...`.
 2. Rozdel obsah na interny/private a public-safe.
 3. Do Git repozitara synchronizuj iba public-safe cast.
-4. Bumpni verziu, validuj manifesty/skilly a az potom ries commit/push/upgrade.
+4. Bumpni verziu, validuj manifesty/skilly a az potom priprav lokalny commit alebo diff.
+5. `git push` a marketplace upgrade ries az po explicitnom potvrdeni pouzivatela v aktualnom chate.
 
 Git repo je distribucny/update kanal pre Codex, nie interny zdroj pravdy. Ak vznikne iba Git zmena bez SharePoint source, update je nekompletny.
 
 Vsetky nove alebo upravovane `.md` subory pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
 
 Internu KB, raw exporty, zakaznicke data, produkcne dumpy, SQL exporty, slow logy, zmluvy a citlive podklady nedavaj do public Gitu. Ak public-safe skill potrebuje internu KB, musi ju hladat v lokalnom `AI Agent` roote a pri absencii nahlasit access gap.
+
+Bez potvrdenia pushu mozes pripravit SharePoint source, Git working tree, validacie, diff alebo lokalny commit na review. Nepovazuj vseobecne zadanie "oprav to", "implementuj plan" alebo "sprav update" za suhlas s pushom do `main`.
 
 ## SharePoint Struktura
 
@@ -165,7 +168,7 @@ dependencies:
 
 ## Validacia
 
-Pred pushom spusti:
+Pred ziadostou o schvalenie pushu spusti:
 
 ```powershell
 python "C:\Users\Ján Zuštiak\.codex\skills\.system\skill-creator\scripts\quick_validate.py" "<skill-dir>"
@@ -191,6 +194,11 @@ Potom:
 ```powershell
 git -C "C:\AiAgent\repos\<marketplace-id>" add .
 git -C "C:\AiAgent\repos\<marketplace-id>" commit -m "<kratky popis>"
+```
+
+Potom zastav a vypytaj si explicitne potvrdenie pouzivatela. Az po nom pokracuj:
+
+```powershell
 git -C "C:\AiAgent\repos\<marketplace-id>" push
 codex plugin marketplace upgrade <codex-marketplace-id>
 ```
@@ -201,4 +209,5 @@ codex plugin marketplace upgrade <codex-marketplace-id>
 - Nepridavaj internu KB ani customer data do public Git.
 - Nepridavaj MCP bez `.mcp.json` a bez validacie plugin manifestu.
 - Nepridavaj plugin do marketplace JSON bez realneho `plugins/<plugin-id>`.
-- Nevynechaj Git push, ak ma byt update dostupny ostatnym cez Codex.
+- Nevykonaj Git push bez explicitneho potvrdenia pouzivatela v aktualnom chate.
+- Ak ma byt update dostupny ostatnym cez Codex, vysvetli, ze po review bude potrebny schvaleny Git push.

@@ -104,7 +104,8 @@ SharePoint `AI Agent/marketplaces/<marketplace-id>/...` je zdroj pravdy pre mark
 1. uprav alebo vytvor SharePoint source,
 2. oddel interny/private obsah od public-safe obsahu,
 3. zosynchronizuj iba public-safe cast do Git repo,
-4. bumpni verziu, validuj a az potom publikuj update.
+4. bumpni verziu a validuj,
+5. publikuj update cez `git push` iba po explicitnom potvrdeni pouzivatela v aktualnom chate.
 
 Ak sa znalost pouziva vo viacerych skilloch v jednom plugine, patri na plugin-level KB. Ak sa pouziva vo viacerych pluginoch jedneho marketplace, patri na marketplace-level alebo spolocnu marketplace KB iba po explicitnom schvaleni struktury. Internu KB neduplikuj do Gitu; public Git skill ma odkazovat na lokalny `AI Agent` root alebo nahlasit access gap.
 
