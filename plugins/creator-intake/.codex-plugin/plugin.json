@@ -1,7 +1,7 @@
 {
   "name": "creator-intake",
-  "version": "0.1.19",
-  "description": "Verejne bezpecny vstupny plugin pre rozhodovanie, ci AgeVolt AI poziadavka patri do marketplace, pluginu, skillu, KB, MCP, pravidla, skriptu alebo bez migracie.",
+  "version": "0.1.20",
+  "description": "Public-safe intake plugin pre rozhodovanie, ci AgeVolt AI poziadavka patri do marketplace, pluginu, skillu, KB, MCP, pravidla, scriptu alebo bez migracie.",
   "author": {
     "name": "AgeVolt",
     "email": "zustiak@agevolt.com",
@@ -21,8 +21,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Creator Intake",
-    "shortDescription": "Rozhoduje typ AgeVolt AI artefaktu.",
-    "longDescription": "Creator Intake je verejne bezpecna vstupna brana pre AgeVolt Creator. Pri poziadavkach na nove marketplace-y, pluginy, skilly, KB, MCP, pravidla alebo migraciu najprv rozhodne spravny typ artefaktu, najde lokalny SharePoint AI Agent root v minimalnej marketplace strukture a pripravi navrh artefaktu namiesto nahodnej implementacie. Pri implementacii vyzaduje SharePoint zdroj ako prvy zapis, verejne bezpecny Git az ako distribucnu kopiu a vsetky nove alebo upravovane .md subory po slovensky. Pred aj po edite kontroluje, ci je realny Git checkout zosuladeny so SharePoint zdrojom, ci skilly neodkazuju na chybajuce KB alebo assets a ci sukromne podklady ostavaju iba v SharePointe. Git push do main/master/release alebo zdielanej vetvy je povoleny iba po explicitnom potvrdeni pouzivatela v aktualnom chate. Pri MCP vyzaduje Codex kompatibilne nazvy toolov, spravny MCP handshake, server_code pri konkretnom plugine a zakazuje priame HTTP fallbacky v pouzivatelskych pracovnych postupoch.",
+    "shortDescription": "Classifies AgeVolt AI artifacts.",
+    "longDescription": "Creator Intake is the public-safe entry gate for AgeVolt Creator. For new marketplaces, plugins, skills, KB, MCP, rules, or migration requests, it first classifies the artifact type, finds the local SharePoint AI Agent root, and prepares an artifact proposal instead of random implementation. During implementation it requires SharePoint source first, public-safe Git as the distribution copy, English UI names for marketplaces, plugins, and skills, and Slovak Markdown bodies unless explicitly requested otherwise. Before and after edits it checks that the real Git checkout is aligned with the SharePoint source, that skills do not reference missing KB or assets, and that private inputs stay in SharePoint only. Git push to main/master/release or another shared branch is allowed only after explicit user approval in the current chat.",
     "developerName": "AgeVolt",
     "category": "Productivity",
     "capabilities": [
@@ -35,9 +35,9 @@
     "composerIcon": "./assets/icon.png",
     "logo": "./assets/logo.png",
     "defaultPrompt": [
-      "Rozhodni, aky AgeVolt AI artefakt mam vytvorit.",
-      "Pridaj plugin alebo skill do existujuceho marketplace.",
-      "Vytvor alebo oprav AgeVolt MCP server na WebSupporte."
+      "Decide which AgeVolt AI artifact should be created.",
+      "Add a plugin or skill to an existing marketplace.",
+      "Create or fix an AgeVolt MCP server on WebSupport."
     ]
   }
 }

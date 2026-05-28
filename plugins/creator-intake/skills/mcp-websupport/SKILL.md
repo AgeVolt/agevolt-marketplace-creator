@@ -13,6 +13,9 @@ Pred vytvorenim alebo vacsou upravou MCP precitaj aj `../../kb/mcp-build-runbook
 
 Vsetky MCP `.md` subory, ktore vytvoris alebo upravis, pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka na iny jazyk.
 
+Ak MCP update vytvara alebo meni plugin/skill UI, `displayName`,
+`display_name`, kratke popisy a default prompty pis po anglicky.
+
 MCP dokumentaciu, server_code README a private reference najprv uprav v SharePoint source pod konkretnym marketplace/pluginom. Do public Gitu synchronizuj iba public-safe cast bez secrets, accessov, raw exportov a internych konfiguracii.
 
 `git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy rob iba po explicitnom potvrdeni pouzivatela v aktualnom chate. Bez potvrdenia priprav len SharePoint source, Git zmeny, validacie, diff alebo lokalny commit na review.

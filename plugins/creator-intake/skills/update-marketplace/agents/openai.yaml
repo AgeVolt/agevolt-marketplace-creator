@@ -1,7 +1,7 @@
 interface:
   display_name: "Update Marketplace"
-  short_description: "Upravi artefakt v existujucom marketplace."
+  short_description: "Updates an artifact in an existing marketplace."
   icon_small: "./assets/icon.png"
   icon_large: "./assets/logo.png"
   brand_color: "#280046"
-  default_prompt: "Uprav plugin, skill, KB alebo MCP v existujucom marketplace."
+  default_prompt: "Update a plugin, skill, KB, or MCP in an existing marketplace."

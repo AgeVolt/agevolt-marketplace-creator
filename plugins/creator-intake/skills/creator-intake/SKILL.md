@@ -57,6 +57,7 @@ Pri kazdom navrhu alebo implementacnom odporucani dodrz tieto pravidla:
 
 - vsetky nove alebo upravovane `.md` subory maju byt po slovensky,
 - vynimky su iba technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka na iny jazyk,
+- UI nazvy a kratke UI texty pre marketplace, plugin a skill maju byt po anglicky,
 - SharePoint `AI Agent/marketplaces/<marketplace-id>/...` je zdroj pravdy,
 - public Git repo je iba public-safe distribucny/update kanal pre Codex,
 - interna KB, raw exporty, zakaznicke data a produkcne podklady ostavaju mimo public Git.

@@ -69,6 +69,8 @@ Aj v plugine vytvaraj iba priecinky s realnym obsahom. `skills/` vytvor, ked plu
 Kazdy AgeVolt plugin ma mat v `.codex-plugin/plugin.json`:
 
 - kratke `interface.displayName`, idealne do 24 znakov,
+- `interface.displayName`, `interface.shortDescription`, default prompty a
+  skillove `agents/openai.yaml` UI texty po anglicky,
 - `interface.developerName: "AgeVolt"`,
 - `interface.brandColor: "#280046"`,
 - `interface.composerIcon: "./assets/icon.png"`,
@@ -79,9 +81,12 @@ Kazdy skill, ktory ma `agents/openai.yaml`, ma mat:
 
 ```yaml
 interface:
+  display_name: "<English Skill Name>"
+  short_description: "<English short description>"
   icon_small: "./assets/icon.png"
   icon_large: "./assets/logo.png"
   brand_color: "#280046"
+  default_prompt: "<English default prompt>"
 ```
 
 Subory `assets/icon.png` a `assets/logo.png` drzte pri danom skille, aby cesty fungovali aj po instalacii do Codex cache. Nepouzivaj genericke emoji, nahodne ikonky alebo ine logo, ak pouzivatel explicitne neziada branded plugin tretej strany.

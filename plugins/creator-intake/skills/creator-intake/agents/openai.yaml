@@ -1,7 +1,7 @@
 interface:
   display_name: "Creator Intake"
-  short_description: "Intake a rozhodnutie typu artefaktu."
+  short_description: "Intake and artifact classification."
   icon_small: "./assets/icon.png"
   icon_large: "./assets/logo.png"
   brand_color: "#280046"
-  default_prompt: "Rozhodni, aky AgeVolt AI artefakt ma vzniknut."
+  default_prompt: "Decide which AgeVolt AI artifact should be created."

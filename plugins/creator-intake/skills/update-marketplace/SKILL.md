@@ -52,7 +52,7 @@ Najprv urci:
 1. existujuci marketplace,
 2. plugin,
 3. typ zmeny: `new-plugin`, `new-skill`, `update-skill`, `new-kb`, `update-kb`, `new-mcp`, `update-mcp`, `manifest-update`,
-4. ci je obsah verejne bezpecny pre Git.
+4. ci je obsah public-safe pre Git.
 
 Ak marketplace nesedi, nepresuvaj obsah nasilu. Pouzi `marketplace-catalog.md` a navrhni spravny marketplace alebo novy marketplace proposal.
 
@@ -60,26 +60,40 @@ Ak marketplace nesedi, nepresuvaj obsah nasilu. Pouzi `marketplace-catalog.md` a
 
 Kazdy update existujuceho marketplace rob v tomto poradi:
 
-1. Najdi SharePoint zdroj v `AI Agent/marketplaces/<marketplace-id>/...`.
-2. Najdi realny Git checkout marketplace. Ak pouzivatel ukaze konkretnu cestu, pouzi presne tu a neprepni sa do ineho clone.
-3. Pred editom precitaj relevantne README, manifesty, `SKILL.md`, `agents/openai.yaml` a KB v SharePointe aj v Gite.
-4. Rozdel obsah na interny/sukromny a verejne bezpecny.
-5. Uprav alebo vytvor SharePoint zdroj.
-6. Do Git repozitara synchronizuj iba verejne bezpecnu cast v tom istom update.
-7. Po edite porovnaj, ze verejne bezpecne casti v SharePointe a Gite su zosuladene.
-8. Skontroluj jazyk upravenych `.md` casti a referencie medzi skillmi, KB, assets, MCP a manifestmi.
+1. Pred editom precitaj alebo vypis cielovy SharePoint source v
+   `AI Agent/marketplaces/<marketplace-id>/...` aj zodpovedajuci Git checkout.
+2. Porovnaj SharePoint a Git: subory iba v SharePointe, iba v Gite a rozdielne
+   subory. Rozhodni, co je public-safe Git obsah a co je SharePoint-only private.
+3. Uprav alebo vytvor SharePoint source v `AI Agent/marketplaces/<marketplace-id>/...`.
+4. Rozdel obsah na interny/private a public-safe.
+5. Do Git repozitara synchronizuj iba public-safe cast vratane public-safe KB,
+   skillov, manifestov a README.
+6. Po edite znova porovnaj SharePoint a Git public-safe cast. Git subory musia
+   byt zhodne so SharePoint zdrojom alebo musia mat jasne zdokumentovanu
+   public-safe projekciu.
+7. Skontroluj jazyk vsetkych novych alebo upravenych `.md` suborov v SharePointe
+   aj Gite; maju byt po slovensky okrem technickych identifikatorov a povolenych
+   vynimiek.
+8. Skontroluj, ze public Git skill neodkazuje na chybajucu KB bez access-gap
+   pravidla. Ak skill odkazuje na public-safe KB, KB musi byt aj v Gite.
 9. Bumpni verziu, validuj manifesty/skilly a az potom priprav lokalny commit alebo diff.
 10. `git push` a marketplace upgrade ries az po explicitnom potvrdeni pouzivatela v aktualnom chate.
 
-Git repo je distribucny/aktualizacny kanal pre Codex, nie interny zdroj pravdy. Ak vznikne iba Git zmena bez SharePoint zdroja, update je nekompletny.
+Git repo je distribucny/update kanal pre Codex, nie interny zdroj pravdy. Ak vznikne iba Git zmena bez SharePoint source, update je nekompletny.
 
 Vsetky nove alebo upravovane `.md` subory pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
 
-Ak sa zmeni verejne bezpecny README, KB, `SKILL.md`, `agents/openai.yaml`, `plugin.yaml`, `.codex-plugin/plugin.json`, `marketplace.yaml` alebo `.agents/plugins/marketplace.json`, rovnaky verejne bezpecny stav musi byt po update v SharePointe aj v Git checkoute. Ak sukromny zdroj nemoze ist do Gitu, Git musi obsahovat iba verejne bezpecny suhrn alebo access-gap pravidlo.
+UI nazvy a kratke UI texty pre marketplace, plugin a skill pis po anglicky.
+Toto plati pre `.agents/plugins/marketplace.json` `interface.displayName`,
+`.codex-plugin/plugin.json` `interface.displayName`, `shortDescription`,
+`defaultPrompt`, `plugin.yaml` `display_name` a `skills/*/agents/openai.yaml`
+`display_name`, `short_description`, `default_prompt`.
 
-Internu KB, raw exporty, zakaznicke data, produkcne dumpy, SQL exporty, slow logy, zmluvy a citlive podklady nedavaj do verejneho Gitu. Ak verejne bezpecny skill potrebuje internu KB, musi ju hladat v lokalnom `AI Agent` roote a pri absencii nahlasit access gap.
+Ak sa v SharePointe meni public-safe KB, README, skill alebo manifest, zodpovedajuca Git kopia musi byt aktualizovana v tej istej robote. Ak subor nesmie ist do Gitu, dopis alebo ponechaj jasne SharePoint-only/private oznacenie a uisti sa, ze Git skill pri jeho absencii nehada.
 
-Bez potvrdenia pushu mozes pripravit SharePoint zdroj, Git working tree, validacie, diff alebo lokalny commit na kontrolu. Nepovazuj vseobecne zadanie "oprav to", "implementuj plan" alebo "sprav update" za suhlas s pushom do `main`.
+Internu KB, raw exporty, zakaznicke data, produkcne dumpy, SQL exporty, slow logy, zmluvy a citlive podklady nedavaj do public Gitu. Ak public-safe skill potrebuje internu KB, musi ju hladat v lokalnom `AI Agent` roote a pri absencii nahlasit access gap.
+
+Bez potvrdenia pushu mozes pripravit SharePoint source, Git working tree, validacie, diff alebo lokalny commit na review. Nepovazuj vseobecne zadanie "oprav to", "implementuj plan" alebo "sprav update" za suhlas s pushom do `main`.
 
 ## SharePoint Struktura
 
@@ -112,7 +126,7 @@ Nevytvaraj prazdne `templates/`, `tests/`, `mcp/`, `kb/`, `assets/` ani `scripts
 
 ## Git Update
 
-Kazdy verejne bezpecny update musi ist aj do Git repozitara marketplace:
+Kazdy public-safe update musi ist aj do Git repozitara marketplace:
 
 ```text
 C:\AiAgent\repos\<marketplace-id>
@@ -175,13 +189,6 @@ dependencies:
 
 ## Validacia
 
-Pred ziadostou o schvalenie pushu najprv skontroluj:
-
-- SharePoint zdroj aj Git checkout obsahuje vsetky upravene verejne bezpecne subory.
-- Git neobsahuje sukromnu KB, raw exporty, zakaznicke data, produkcne SQL dumpy, slow logy, hosty ani secrets.
-- Upraveny verejne bezpecny text je po slovensky okrem technickych identifikatorov a povolenych vynimiek.
-- `SKILL.md`, `agents/openai.yaml`, KB a manifesty neodkazuju na chybajuce subory.
-
 Pred ziadostou o schvalenie pushu spusti:
 
 ```powershell
@@ -189,13 +196,21 @@ python "C:\Users\Ján Zuštiak\.codex\skills\.system\skill-creator\scripts\quick
 python "C:\Users\Ján Zuštiak\.codex\skills\.system\plugin-creator\scripts\validate_plugin.py" "<plugin-dir>"
 ```
 
+Pred tym este skontroluj:
+
+- SharePoint source vs Git public-safe projekcia,
+- zmenene `.md` subory su po slovensky,
+- public Git neobsahuje private KB ani raw exporty,
+- public Git skill neodkazuje na chybajuci public-safe KB subor,
+- private SharePoint-only KB ma v skille jasne access-gap spravanie.
+
 Pri MCP navyse over:
 
 - `initialize` vrati validnu JSON-RPC response,
 - `notifications/initialized` bez `id` vrati prazdne telo s HTTP `202` alebo `204`,
 - `tools/list` vrati Codex kompatibilne nazvy bez bodiek,
 - jeden read-only `tools/call` funguje priamo cez MCP,
-- sukromne MCP ma `codex mcp login <mcp-server-id> --scopes MCP.Access`, `codex mcp list` = `Auth OAuth` a novy chat alebo `codex exec` vidi tool bez shell fallbacku.
+- private MCP ma `codex mcp login <mcp-server-id> --scopes MCP.Access`, `codex mcp list` = `Auth OAuth` a novy chat alebo `codex exec` vidi tool bez shell fallbacku.
 
 Skontroluj JSON:
 
@@ -220,8 +235,8 @@ codex plugin marketplace upgrade <codex-marketplace-id>
 ## Stop Pravidla
 
 - Nemen firemny marketplace bez explicitnej poziadavky.
-- Nepridavaj internu KB ani zakaznicke data do verejneho Gitu.
+- Nepridavaj internu KB ani customer data do public Git.
 - Nepridavaj MCP bez `.mcp.json` a bez validacie plugin manifestu.
 - Nepridavaj plugin do marketplace JSON bez realneho `plugins/<plugin-id>`.
 - Nevykonaj Git push bez explicitneho potvrdenia pouzivatela v aktualnom chate.
-- Ak ma byt update dostupny ostatnym cez Codex, vysvetli, ze po kontrole bude potrebny schvaleny Git push.
+- Ak ma byt update dostupny ostatnym cez Codex, vysvetli, ze po review bude potrebny schvaleny Git push.

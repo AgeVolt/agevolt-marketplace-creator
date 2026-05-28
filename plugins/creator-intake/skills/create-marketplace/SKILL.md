@@ -58,6 +58,12 @@ Az potom priprav public-safe Git repo alebo Git mirror. Git nesmie byt jedine mi
 
 Vsetky nove alebo upravovane `.md` subory pis po slovensky. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
 
+UI nazvy a kratke UI texty pre marketplace, plugin a skill pis po anglicky.
+Toto plati pre `.agents/plugins/marketplace.json` `interface.displayName`,
+`.codex-plugin/plugin.json` `interface.displayName`, `shortDescription`,
+`defaultPrompt`, `plugin.yaml` `display_name` a `skills/*/agents/openai.yaml`
+`display_name`, `short_description`, `default_prompt`.
+
 Do public Gitu nedavaj internu KB, raw exporty, zakaznicke data, produkcne dumpy ani citlive podklady. Public Git obsahuje iba manifesty, public-safe README, public-safe skill workflowy, public-safe KB a instalacne/testovacie pokyny.
 
 `git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy nerob bez explicitneho potvrdenia pouzivatela v aktualnom chate. Ak potvrdenie chyba, priprav iba SharePoint source, Git zmeny, validacie, diff alebo lokalny commit na review a zastav sa pred pushom.
