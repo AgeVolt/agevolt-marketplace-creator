@@ -68,6 +68,8 @@ Do public Gitu nedavaj internu KB, raw exporty, zakaznicke data, produkcne dumpy
 
 `git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy nerob bez explicitneho potvrdenia pouzivatela v aktualnom chate. Ak potvrdenie chyba, priprav iba SharePoint source, Git zmeny, validacie, diff alebo lokalny commit na review a zastav sa pred pushom.
 
+Kazdy realne instalovatelny plugin v novom AgeVolt marketplace nastav v `.agents/plugins/marketplace.json` na `policy.installation: "INSTALLED_BY_DEFAULT"`. Default `policy.authentication` je `ON_INSTALL`; `ON_USE` pouzi iba pri user-data alebo MCP OAuth pluginoch. Po pridani alebo upgrade marketplace samotny Codex CLI pluginy nenainstaluje, preto po publikovani pouzi `install-marketplace-plugins` alebo `codex plugin add <plugin>@<marketplace>` pre kazdy default plugin.
+
 ## Rozhodnutie
 
 Novy marketplace vytvor iba ked sa meni cielova skupina, citlivost, public/private hranica, instalacny kanal alebo update kanal.
@@ -130,4 +132,5 @@ Minimalny test marketplace je:
 - `marketplace.yaml` ma `id`, `display_name`, `status`, `git_repo`, `audience`, `purpose`, `plugins`.
 - Git repo obsahuje `.agents/plugins/marketplace.json`.
 - Codex vie Git marketplace pridat alebo upgradovat.
-- Pluginy sa instaluju az vtedy, ked marketplace obsahuje aspon jeden schvaleny plugin.
+- Kazdy schvaleny instalovatelny plugin v marketplace manifeste ma `INSTALLED_BY_DEFAULT`, ak nema zdokumentovanu vynimku.
+- Po pridani alebo upgrade marketplace prebehne `install-marketplace-plugins` a `codex plugin list` ukaze default pluginy ako `installed, enabled`.

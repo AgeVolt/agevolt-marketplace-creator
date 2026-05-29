@@ -1,0 +1,7 @@
+interface:
+  display_name: "Install Marketplace Plugins"
+  short_description: "Installs default plugins from a marketplace."
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/logo.png"
+  brand_color: "#280046"
+  default_prompt: "Install all default plugins from an AgeVolt marketplace."

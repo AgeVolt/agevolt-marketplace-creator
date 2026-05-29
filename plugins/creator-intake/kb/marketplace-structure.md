@@ -91,6 +91,33 @@ interface:
 
 Subory `assets/icon.png` a `assets/logo.png` drzte pri danom skille, aby cesty fungovali aj po instalacii do Codex cache. Nepouzivaj genericke emoji, nahodne ikonky alebo ine logo, ak pouzivatel explicitne neziada branded plugin tretej strany.
 
+## Plugin Install Policy Standard
+
+Kazdy realne instalovatelny AgeVolt plugin v `.agents/plugins/marketplace.json`
+ma byt defaultne instalovany spolu s marketplace:
+
+```json
+"policy": {
+  "installation": "INSTALLED_BY_DEFAULT",
+  "authentication": "ON_INSTALL"
+}
+```
+
+`authentication: "ON_USE"` pouzi iba vtedy, ked plugin cita pouzivatelske data,
+spusta MCP OAuth alebo ma iny dovod nevyzadovat login hned pri instalacii.
+
+`INSTALLED_BY_DEFAULT` je AgeVolt deklaracia zameru. Aktualne Codex CLI po
+`codex plugin marketplace add` ani po `codex plugin marketplace upgrade`
+nenainstaluje pluginy automaticky. Po pridani alebo upgrade marketplace preto
+spusti Creator skill `install-marketplace-plugins`, alebo explicitne vykonaj:
+
+```text
+codex plugin add <plugin-id>@<codex-marketplace-id>
+```
+
+pre kazdy plugin s `INSTALLED_BY_DEFAULT`. Potom over `codex plugin list`.
+Skilly sa neinstaluju samostatne; pridu s instalovanym pluginom.
+
 ## Pravidlo Urovni
 
 - Nedavaj skill pod MCP server.

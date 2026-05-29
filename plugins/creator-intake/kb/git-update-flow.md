@@ -158,12 +158,15 @@ Do `.agents/plugins/marketplace.json` pridaj entry:
     "path": "./plugins/<plugin-id>"
   },
   "policy": {
-    "installation": "AVAILABLE",
+    "installation": "INSTALLED_BY_DEFAULT",
     "authentication": "ON_INSTALL"
   },
   "category": "Productivity"
 }
 ```
+
+`authentication: "ON_USE"` pouzi iba pri pluginoch s user-data alebo MCP OAuth,
+kde sa login ma vyziadat az pri prvom realnom pouziti.
 
 Plugin manifest musi mat standardne AgeVolt UI assety:
 
@@ -247,6 +250,7 @@ Pred ziadostou o schvalenie pushu:
 Po schvalenom pushi:
 
 - `codex plugin marketplace upgrade <codex-marketplace-id>`
+- `codex plugin add <plugin-id>@<codex-marketplace-id>` pre kazdy plugin s `INSTALLED_BY_DEFAULT`, alebo pouzi skill `install-marketplace-plugins`
 - skontroluj `~/.codex/config.toml` `last_revision`,
 - skontroluj cache `~/.codex/plugins/cache/<codex-marketplace-id>/<plugin-id>/<version>/`,
 - pri MCP over, ze `.mcp.json` je v cache a plugin manifest ma `mcpServers`,

@@ -91,6 +91,8 @@ Toto plati pre `.agents/plugins/marketplace.json` `interface.displayName`,
 
 Ak sa v SharePointe meni public-safe KB, README, skill alebo manifest, zodpovedajuca Git kopia musi byt aktualizovana v tej istej robote. Ak subor nesmie ist do Gitu, dopis alebo ponechaj jasne SharePoint-only/private oznacenie a uisti sa, ze Git skill pri jeho absencii nehada.
 
+Pri kazdom novom alebo upravenom `.agents/plugins/marketplace.json` nastav realne instalovatelne AgeVolt pluginy defaultne na `policy.installation: "INSTALLED_BY_DEFAULT"`. Default `policy.authentication` je `ON_INSTALL`; `ON_USE` pouzi iba pri user-data alebo MCP OAuth pluginoch. Po schvalenom pushi a marketplace upgrade spusti `install-marketplace-plugins` alebo `codex plugin add <plugin>@<marketplace>` pre kazdy default plugin, lebo samotny `marketplace add/upgrade` pluginy cez CLI nenainstaluje.
+
 Internu KB, raw exporty, zakaznicke data, produkcne dumpy, SQL exporty, slow logy, zmluvy a citlive podklady nedavaj do public Gitu. Ak public-safe skill potrebuje internu KB, musi ju hladat v lokalnom `AI Agent` roote a pri absencii nahlasit access gap.
 
 Bez potvrdenia pushu mozes pripravit SharePoint source, Git working tree, validacie, diff alebo lokalny commit na review. Nepovazuj vseobecne zadanie "oprav to", "implementuj plan" alebo "sprav update" za suhlas s pushom do `main`.
@@ -230,7 +232,10 @@ Potom zastav a vypytaj si explicitne potvrdenie pouzivatela. Az po nom pokracuj:
 ```powershell
 git -C "C:\AiAgent\repos\<marketplace-id>" push
 codex plugin marketplace upgrade <codex-marketplace-id>
+codex plugin add <plugin-id>@<codex-marketplace-id>
 ```
+
+Ak marketplace obsahuje viac default pluginov, namiesto jednotlivych prikazov pouzi skill `install-marketplace-plugins` a over `codex plugin list`.
 
 ## Stop Pravidla
 

@@ -1,6 +1,6 @@
 {
   "name": "creator-intake",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "description": "Public-safe intake plugin pre rozhodovanie, ci AgeVolt AI poziadavka patri do marketplace, pluginu, skillu, KB, MCP, pravidla, scriptu alebo bez migracie.",
   "author": {
     "name": "AgeVolt",
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "Creator Intake",
     "shortDescription": "Classifies AgeVolt AI artifacts.",
-    "longDescription": "Creator Intake is the public-safe entry gate for AgeVolt Creator. For new marketplaces, plugins, skills, KB, MCP, rules, or migration requests, it first classifies the artifact type, finds the local SharePoint AI Agent root, and prepares an artifact proposal instead of random implementation. During implementation it requires SharePoint source first, public-safe Git as the distribution copy, English UI names for marketplaces, plugins, and skills, and Slovak Markdown bodies unless explicitly requested otherwise. Before and after edits it checks that the real Git checkout is aligned with the SharePoint source, that skills do not reference missing KB or assets, and that private inputs stay in SharePoint only. Git push to main/master/release or another shared branch is allowed only after explicit user approval in the current chat.",
+    "longDescription": "Creator Intake is the public-safe entry gate for AgeVolt Creator. For new marketplaces, plugins, skills, KB, MCP, rules, or migration requests, it first classifies the artifact type, finds the local SharePoint AI Agent root, and prepares an artifact proposal instead of random implementation. During implementation it requires SharePoint source first, public-safe Git as the distribution copy, English UI names for marketplaces, plugins, and skills, and Slovak Markdown bodies unless explicitly requested otherwise. Before and after edits it checks that the real Git checkout is aligned with the SharePoint source, that skills do not reference missing KB or assets, and that private inputs stay in SharePoint only. AgeVolt marketplace plugins are marked installed by default and Creator can install all default plugins after marketplace add or upgrade. Git push to main/master/release or another shared branch is allowed only after explicit user approval in the current chat.",
     "developerName": "AgeVolt",
     "category": "Productivity",
     "capabilities": [

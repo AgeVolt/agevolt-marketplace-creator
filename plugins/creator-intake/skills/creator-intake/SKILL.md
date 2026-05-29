@@ -62,6 +62,7 @@ Pri kazdom navrhu alebo implementacnom odporucani dodrz tieto pravidla:
 - public Git repo je iba public-safe distribucny/update kanal pre Codex,
 - interna KB, raw exporty, zakaznicke data a produkcne podklady ostavaju mimo public Git.
 - `git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy je povoleny iba po explicitnom potvrdeni pouzivatela v aktualnom chate.
+- realne instalovatelne AgeVolt pluginy v marketplace manifeste maju byt defaultne `INSTALLED_BY_DEFAULT`, aby ich Creator po pridani alebo upgrade marketplace vedel instalovat naraz cez `install-marketplace-plugins`.
 
 Ak pouzivatel chce implementovat zmenu v existujucom marketplace, odkaz na `update-marketplace` musi zahrnat SharePoint source-first postup. Ak ide o novy marketplace, odkaz na `create-marketplace` musi zahrnat minimalnu SharePoint strukturu pred Gitom.
 
@@ -81,6 +82,8 @@ Vseobecne schvalenie implementacie nie je schvalenie pushu. Ak ma byt zmena publ
 - Script: vytvor ked treba deterministicku opakovatelnu operaciu.
 
 Pred odporucanim noveho skillu skontroluj, ci v cielovom plugine uz neexistuje podobny skill. Novy skill ma vzniknut iba vtedy, ked ma realne iny trigger, iny scope, inu description a ine pravidla ako existujuce skilly.
+
+Ak poziadavka riesi iba to, ze po pridani marketplace sa maju nainstalovat vsetky jeho pluginy a skilly, nevytvaraj novy marketplace ani plugin. Pouzi alebo odporuc `install-marketplace-plugins`. Skilly sa neinstaluju samostatne; spristupnia sa instalaciou pluginu.
 
 ## MCP Standard
 

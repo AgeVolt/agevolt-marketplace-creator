@@ -25,6 +25,7 @@ creator-intake/
   skills/
     create-marketplace/
     update-marketplace/
+    install-marketplace-plugins/
     mcp-websupport/
   kb/
     rules.md
@@ -40,6 +41,11 @@ creator-intake/
 Pri tvorbe alebo oprave MCP najprv citaj `kb/mcp-build-runbook.md`. Ten definuje
 strukturu MCP pluginu, WebSupport server code, auth cez zdielany AgeVolt OAuth
 Broker, zakaz manualnych token fallbackov a povinne E2E testy.
+
+Pri pridani alebo upgrade marketplace pouzi `install-marketplace-plugins`, aby
+sa vsetky pluginy oznacene ako `INSTALLED_BY_DEFAULT` nainstalovali cez
+`codex plugin add <plugin>@<marketplace>`. Samotne pridanie marketplace cez
+Codex CLI pluginy nenainstaluje a skilly sa spristupnia az s pluginom.
 
 ## Jazyk A Ulozisko
 

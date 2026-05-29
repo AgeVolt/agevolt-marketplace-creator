@@ -48,6 +48,15 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 - Bez potvrdenia pushu moze agent pripravit SharePoint source, Git working tree, validacie, diff alebo lokalny commit na review, ale musi zastavit pred `git push`.
 - Vseobecne zadanie typu "oprav to", "implementuj plan" alebo "sprav update" nie je suhlas s pushom do `main`.
 
+## Marketplace Instalacia Pluginov
+
+- Kazdy realne instalovatelny AgeVolt plugin v `.agents/plugins/marketplace.json` ma mat defaultne `policy.installation: "INSTALLED_BY_DEFAULT"`.
+- Default `policy.authentication` je `ON_INSTALL`. Vynimka je povolena pri user-data alebo MCP OAuth pluginoch, kde je zamerne lepsie `ON_USE`.
+- Ak plugin nema byt instalovany automaticky po pridani marketplace, musi mat zdokumentovany dovod v Creator navrhu alebo pri marketplace update.
+- Samotne `codex plugin marketplace add` alebo `codex plugin marketplace upgrade` pluginy cez CLI realne nenainstaluje. Po pridani alebo upgrade marketplace treba spustit `install-marketplace-plugins` alebo rovnocenny krok `codex plugin add <plugin>@<marketplace>` pre kazdy default plugin.
+- Skilly sa neinstaluju samostatne. Dostupne su az po instalacii pluginu, ktory ich obsahuje.
+- Pri novom plugine alebo zmene marketplace manifestu vzdy over `codex plugin list`, aby kazdy default plugin skoncil ako `installed, enabled`.
+
 ## Pravidla Jedinecnosti Skillov
 
 Kazdy skill v plugine musi mat jasny vlastny dovod existencie.

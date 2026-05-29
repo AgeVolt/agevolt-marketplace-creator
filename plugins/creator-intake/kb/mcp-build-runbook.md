@@ -84,7 +84,7 @@ plugins/<plugin-id>/
     "path": "./plugins/<plugin-id>"
   },
   "policy": {
-    "installation": "AVAILABLE",
+    "installation": "INSTALLED_BY_DEFAULT",
     "authentication": "ON_INSTALL"
   },
   "category": "Productivity"
