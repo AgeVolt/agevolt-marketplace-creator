@@ -1,6 +1,6 @@
 {
   "name": "creator-intake",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Public-safe intake plugin pre rozhodovanie, ci AgeVolt AI poziadavka patri do marketplace, pluginu, skillu, KB, MCP, pravidla, scriptu alebo bez migracie.",
   "author": {
     "name": "AgeVolt",

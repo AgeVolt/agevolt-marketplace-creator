@@ -32,6 +32,7 @@ creator-intake/
     marketplace-structure.md
     marketplace-catalog.md
     git-update-flow.md
+    distribution-feedback-model.md
     mcp-build-runbook.md
     artifact-proposal.md
 ```
@@ -46,6 +47,16 @@ Pri pridani alebo upgrade marketplace pouzi `install-marketplace-plugins`, aby
 sa vsetky pluginy oznacene ako `INSTALLED_BY_DEFAULT` nainstalovali cez
 `codex plugin add <plugin>@<marketplace>`. Samotne pridanie marketplace cez
 Codex CLI pluginy nenainstaluje a skilly sa spristupnia az s pluginom.
+
+Pri beznych pouzivateloch rozlisuj dve veci:
+
+- Git marketplace je install/update balik pre Codex.
+- SharePoint `AI Agent/marketplaces/**` je admin source of truth.
+
+Ak pouzivatel hlasi problem, navrhuje zmenu alebo je frustrovany z vystupu AI,
+neved ho k uprave ostreho marketplace source. Feedback ma ist do
+`AI Agent/feedback/inbox/` a az po admin triage sa zapracuje do KB, skillu,
+pluginu alebo MCP.
 
 ## Jazyk A Ulozisko
 

@@ -16,6 +16,18 @@ Preto kazdy public-safe artefakt musi mat:
 
 Poradie je zavazne: najprv SharePoint source, potom public-safe Git mirror. Ak agent vytvori alebo upravi iba Git bez SharePoint source, zmena je nekompletna.
 
+Pre zamestnanca je Git iba install/update balik. Bezne pouzivatelske pluginy a
+skilly z Gitu nemaju smerovat pouzivatela na upravu SharePoint source v
+`marketplaces/**`. Ak pouzivatel hlasi chybu, chce novu znalost alebo navrhuje
+zmenu, zapisuje sa feedback do:
+
+```text
+AI Agent/feedback/inbox/
+```
+
+Admin alebo Creator update workflow potom rozhodne, ci sa feedback zapracuje do
+SharePoint source a az potom do public-safe Git mirroru.
+
 Vsetky nove alebo upravovane `.md` subory pis po slovensky v SharePointe aj v Gite. Vynimky su technicke identifikatory, nazvy suborov, prikazy, JSON/YAML kluce, frontmatter kluce, API/tool nazvy, presne citacie alebo explicitna poziadavka pouzivatela na iny jazyk.
 
 UI nazvy a kratke UI texty pre marketplace, plugin a skill su vynimka: pis ich
@@ -232,6 +244,7 @@ Do public Git repozitara nepatri:
 - `config.local.php`,
 - exporty zo SharePointu, ClickUpu, Teams, mailov alebo SuperFaktury,
 - interne KB, ktore nie su schvalene ako public-safe.
+- feedback zaznamy od realnych pouzivatelov.
 
 Ak je KB interna iba pre SharePoint, skill v Gite musi vediet najst lokalny `AI Agent` root a precitat ju odtial. Ak root nenajde, musi povedat, ze interna KB nie je dostupna.
 
@@ -242,6 +255,7 @@ Pred ziadostou o schvalenie pushu:
 - porovnanie SharePoint source vs Git public-safe projekcia,
 - kontrola, ze public-safe KB/skilly zmenene v SharePointe su aj v Gite,
 - kontrola, ze private KB je iba v SharePointe a Git skill ma access-gap spravanie,
+- kontrola, ze Git neobsahuje `AI Agent/feedback/**` zaznamy,
 - kontrola slovenciny vo vsetkych novych alebo upravenych `.md` suboroch,
 - `python <skill-creator>/scripts/quick_validate.py <skill-dir>`
 - `python <plugin-creator>/scripts/validate_plugin.py <plugin-dir>`

@@ -27,6 +27,8 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 - Pri MCP write akcii vyzaduj read/preview a explicitne potvrdenie.
 - Pri MCP nikdy nenavrhuj bezny user workflow cez priamy HTTP fallback namiesto MCP tool callu.
 - Nikdy nerob `git push` do `main`, `master`, release branchu ani inej zdielanej vetvy bez explicitneho potvrdenia pouzivatela v aktualnom chate.
+- Bezne pouzivatelske skilly nesmu upravovat ostre zdroje v `AI Agent/marketplaces/**`; poziadavky na zmenu maju zapisat do `AI Agent/feedback/inbox/`.
+- Feedback od realnych pouzivatelov, frustracia, navrhy na zmenu skillu alebo chyba v KB nepatria do public Gitu ani priamo do ostrej KB bez admin triage.
 
 ## Jazyk A Source Of Truth
 
@@ -47,6 +49,8 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 - Ak public Git skill potrebuje internu KB, musi vediet najst lokalny `AI Agent` root a pri jeho absencii jasne povedat, ze interna KB nie je dostupna. Nesmie si ju vymysliet ani ju duplikovat do Gitu.
 - Bez potvrdenia pushu moze agent pripravit SharePoint source, Git working tree, validacie, diff alebo lokalny commit na review, ale musi zastavit pred `git push`.
 - Vseobecne zadanie typu "oprav to", "implementuj plan" alebo "sprav update" nie je suhlas s pushom do `main`.
+- SharePoint `AI Agent/feedback/inbox/` je jediny bezny zapisovy ciel pre navrhy, nespokojnost a zistenia od pouzivatelov. Ostre `marketplaces/**` zdroje upravuje iba admin alebo Creator update workflow.
+- Public Git marketplace je zamestnanecky bootstrap a update kanal. Musi obsahovat dost na instalaciu pluginov, spustenie skillov a public-safe KB, ale nema obsahovat interny pracovny backlog ani feedback queue.
 
 ## Marketplace Instalacia Pluginov
 
@@ -56,6 +60,22 @@ Vyber najmensi artefakt, ktory realne riesi poziadavku.
 - Samotne `codex plugin marketplace add` alebo `codex plugin marketplace upgrade` pluginy cez CLI realne nenainstaluje. Po pridani alebo upgrade marketplace treba spustit `install-marketplace-plugins` alebo rovnocenny krok `codex plugin add <plugin>@<marketplace>` pre kazdy default plugin.
 - Skilly sa neinstaluju samostatne. Dostupne su az po instalacii pluginu, ktory ich obsahuje.
 - Pri novom plugine alebo zmene marketplace manifestu vzdy over `codex plugin list`, aby kazdy default plugin skoncil ako `installed, enabled`.
+
+## Distribucia A Feedback
+
+Pred navrhom alebo update marketplace, ktory ma pouzivat bezny zamestnanec,
+precitaj `distribution-feedback-model.md`.
+
+Dodrz tieto pravidla:
+
+- Git ma byt co najjednoduchsi install/update balik pre Codex.
+- SharePoint je interny source of truth a moze obsahovat private KB alebo MCP
+  server code, ak je chraneny vhodnymi pristupmi.
+- Bezne pouzivatelske skilly z Gitu nemaju byt navadzane na upravu
+  `marketplaces/**`.
+- Ak pouzivatel chce zmenu, je nespokojny alebo skill zisti chybajucu KB,
+  vytvor kratky feedback zaznam do `AI Agent/feedback/inbox/`.
+- Feedback sa do ostrej KB zapracuje az po admin triage.
 
 ## Pravidla Jedinecnosti Skillov
 

@@ -3,3 +3,6 @@ Thumbs.db
 *.log
 .env
 .env.*
+config.local.php
+websupport-private-access.md
+feedback/

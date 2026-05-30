@@ -13,6 +13,7 @@ Toto je aktualny standard pre AgeVolt AI Agent marketplaces.
 | MCP | Zive nastroje, dynamicke zdroje alebo prompt templates cez server. | Ked agent potrebuje API, databazu, vypocet, zapis alebo aktualne data. |
 | Template | Vzor vystupu alebo suboru. | Ked chceme konzistentny format navrhu, dokumentu alebo konfiguracie. |
 | Test | Minimalny scenar overenia. | Pri kazdom artefakte, ktory ma byt opakovane pouzivany alebo distribuovany. |
+| Feedback inbox | Bezpecny vstup pre problemy a navrhy pouzivatelov. | Ked bezny pouzivatel alebo skill hlasi chybu, chybajucu KB alebo navrh zmeny. |
 
 ## Standardny Marketplace
 
@@ -23,7 +24,18 @@ Toto je aktualny standard pre AgeVolt AI Agent marketplaces.
   plugins/
 ```
 
-Na urovni marketplace nedrz prazdne `kb/`, `mcp/`, `templates/` ani `tests/`. Marketplace iba popisuje cielovu skupinu a zoskupuje instalovatelne pluginy.
+Na urovni marketplace nedrz prazdne `mcp/`, `templates/` ani `tests/`.
+Marketplace iba popisuje cielovu skupinu a zoskupuje instalovatelne pluginy.
+
+Marketplace-level `kb/` je povolene iba vtedy, ked ide o pravidla alebo mapy,
+ktore pouziva viac pluginov v tom istom marketplace. Ak znalost patri iba
+jednemu pracovnemu bloku, patri do `plugins/<plugin-id>/kb/`.
+
+Feedback od pouzivatelov nepatri do marketplace `kb/`. Patri do root queue:
+
+```text
+AI Agent/feedback/inbox/
+```
 
 ## Naming Standard
 
@@ -126,6 +138,11 @@ Skilly sa neinstaluju samostatne; pridu s instalovanym pluginom.
 - Skill vysvetluje workflow a bezpecne pouzitie.
 - MCP poskytuje nastroje, resources alebo prompts.
 - KB drzi znalosti, ktore by zbytocne zatazovali `SKILL.md`.
+- Marketplace KB drzi iba cross-plugin pravidla.
+- Plugin KB drzi domenu a pravidla daneho pracovného bloku.
+- Skill reference drzi iba detaily, ktore su potrebne pre jeden skill.
+- MCP KB drzi tool mapping, auth, payloady, bezpecnost a testy MCP.
+- Feedback inbox nie je KB ani backlog v Gite; je to intake queue pre admin triage.
 
 ## Pravidlo Jazyka A Uloziska
 
@@ -140,6 +157,11 @@ SharePoint `AI Agent/marketplaces/<marketplace-id>/...` je zdroj pravdy pre mark
 5. publikuj update cez `git push` iba po explicitnom potvrdeni pouzivatela v aktualnom chate.
 
 Ak sa znalost pouziva vo viacerych skilloch v jednom plugine, patri na plugin-level KB. Ak sa pouziva vo viacerych pluginoch jedneho marketplace, patri na marketplace-level alebo spolocnu marketplace KB iba po explicitnom schvaleni struktury. Internu KB neduplikuj do Gitu; public Git skill ma odkazovat na lokalny `AI Agent` root alebo nahlasit access gap.
+
+Ak znalost vznikla z frustracie alebo navrhu bezneho pouzivatela, najprv ju
+zapis do `AI Agent/feedback/inbox/`. Do KB ju presun az vtedy, ked admin potvrdi,
+ze ide o realne pravidlo, chybajuci proces, novy skill alebo opravu existujuceho
+artefaktu.
 
 ## Skill Boundary Standard
 

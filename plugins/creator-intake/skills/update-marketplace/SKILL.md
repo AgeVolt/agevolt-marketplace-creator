@@ -35,6 +35,7 @@ Ak root existuje, precitaj:
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-catalog.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/git-update-flow.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/mcp-build-runbook.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/distribution-feedback-model.md`
 
 Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 
@@ -42,6 +43,7 @@ Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 - `../../kb/marketplace-catalog.md`
 - `../../kb/git-update-flow.md`
 - `../../kb/mcp-build-runbook.md`
+- `../../kb/distribution-feedback-model.md`
 
 Ak ani tie nie su dostupne, pouzi pravidla v tomto SKILL.md a povedz, ze interny SharePoint root sa nenasiel.
 
@@ -94,6 +96,11 @@ Ak sa v SharePointe meni public-safe KB, README, skill alebo manifest, zodpoveda
 Pri kazdom novom alebo upravenom `.agents/plugins/marketplace.json` nastav realne instalovatelne AgeVolt pluginy defaultne na `policy.installation: "INSTALLED_BY_DEFAULT"`. Default `policy.authentication` je `ON_INSTALL`; `ON_USE` pouzi iba pri user-data alebo MCP OAuth pluginoch. Po schvalenom pushi a marketplace upgrade spusti `install-marketplace-plugins` alebo `codex plugin add <plugin>@<marketplace>` pre kazdy default plugin, lebo samotny `marketplace add/upgrade` pluginy cez CLI nenainstaluje.
 
 Internu KB, raw exporty, zakaznicke data, produkcne dumpy, SQL exporty, slow logy, zmluvy a citlive podklady nedavaj do public Gitu. Ak public-safe skill potrebuje internu KB, musi ju hladat v lokalnom `AI Agent` roote a pri absencii nahlasit access gap.
+
+Feedback od bezneho pouzivatela nikdy nezapisuj priamo do ostreho
+`marketplaces/**` source. Najprv vytvor zaznam v `AI Agent/feedback/inbox/`.
+Az admin triage rozhodne, ci ide o `update-kb`, `update-skill`, `new-skill`,
+`update-mcp`, automatizaciu alebo ziadnu zmenu.
 
 Bez potvrdenia pushu mozes pripravit SharePoint source, Git working tree, validacie, diff alebo lokalny commit na review. Nepovazuj vseobecne zadanie "oprav to", "implementuj plan" alebo "sprav update" za suhlas s pushom do `main`.
 

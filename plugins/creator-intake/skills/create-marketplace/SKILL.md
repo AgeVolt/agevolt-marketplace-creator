@@ -34,6 +34,7 @@ Ak root existuje, precitaj:
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/marketplace-catalog.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/git-update-flow.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/mcp-build-runbook.md`
+- `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/distribution-feedback-model.md`
 - `marketplaces/agevolt-creator-marketplace/plugins/creator-intake/kb/artifact-proposal.md`
 
 Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
@@ -42,6 +43,7 @@ Ak root neexistuje, skus precitat bundlovane KB v tomto plugine:
 - `../../kb/marketplace-catalog.md`
 - `../../kb/git-update-flow.md`
 - `../../kb/mcp-build-runbook.md`
+- `../../kb/distribution-feedback-model.md`
 - `../../kb/artifact-proposal.md`
 
 Ak ani tie nie su dostupne, pouzi pravidla v tomto SKILL.md a povedz, ze interny SharePoint root sa nenasiel.
@@ -69,6 +71,10 @@ Do public Gitu nedavaj internu KB, raw exporty, zakaznicke data, produkcne dumpy
 `git push` do `main`, `master`, release branchu alebo inej zdielanej vetvy nerob bez explicitneho potvrdenia pouzivatela v aktualnom chate. Ak potvrdenie chyba, priprav iba SharePoint source, Git zmeny, validacie, diff alebo lokalny commit na review a zastav sa pred pushom.
 
 Kazdy realne instalovatelny plugin v novom AgeVolt marketplace nastav v `.agents/plugins/marketplace.json` na `policy.installation: "INSTALLED_BY_DEFAULT"`. Default `policy.authentication` je `ON_INSTALL`; `ON_USE` pouzi iba pri user-data alebo MCP OAuth pluginoch. Po pridani alebo upgrade marketplace samotny Codex CLI pluginy nenainstaluje, preto po publikovani pouzi `install-marketplace-plugins` alebo `codex plugin add <plugin>@<marketplace>` pre kazdy default plugin.
+
+Ak marketplace cieli na beznych zamestnancov, Git README musi byt pisany ako
+jednoduchy install navod. Bezny pouzivatel nema byt vedeny k uprave SharePoint
+`marketplaces/**`; navrhy a problemy patria do `AI Agent/feedback/inbox/`.
 
 ## Rozhodnutie
 

@@ -1,0 +1,31 @@
+id: creator-intake
+display_name: "Creator Intake"
+status: active-mvp
+purpose: "Rozhoduje a vedie tvorbu AgeVolt marketplaces, pluginov, skills, KB, MCP, rules a scripts."
+skills:
+  - id: create-marketplace
+    status: active-mvp
+  - id: update-marketplace
+    status: active-mvp
+  - id: install-marketplace-plugins
+    status: active-mvp
+kb:
+  - rules.md
+  - marketplace-structure.md
+  - marketplace-catalog.md
+  - git-update-flow.md
+  - distribution-feedback-model.md
+  - artifact-proposal.md
+rules:
+  do_not_create_without_intake: true
+  update_revision_history_on_company_changes: true
+  markdown_language_default: slovak
+  sharepoint_source_first: true
+  require_explicit_user_approval_before_git_push: true
+  public_git_contains_only_public_safe_bootstrap: true
+  require_sharepoint_git_sync_audit_before_and_after_edit: true
+  require_markdown_language_audit_before_review: true
+  require_public_skill_kb_reference_audit: true
+  ui_names_language: english
+  marketplace_plugins_install_by_default: true
+  install_default_plugins_after_marketplace_add_or_upgrade: true
